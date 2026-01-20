@@ -1,0 +1,22 @@
+=== INCIDENT REPORT: FIRE-101 ===
+Date: Tue Jan 20 22:52:05 IST 2026
+Location: 10, 40 | Severity: 4
+Status: ACTIVE
+---------------------------------------
+RESPONSE LOG (Station Groups):
+
+>>> DEPLOYMENT FROM: Station_Kandoli_Post (ETA: 67 min)
+    - FF-309: FF_309
+    - FF-310: FF_310
+    - FF-311: FF_311
+    - FF-312: FF_312
+    - FF-313: FF_313
+    - FF-314: FF_314
+    - FF-315: FF_315
+    - FF-316: FF_316
+    - FF-317: FF_317
+    - FF-318: FF_318
+    - FF-319: FF_319
+    - FF-320: FF_320
+RESULT: SUCCESSFUL DEPLOYMENT (Total: 12)
+Evidence: Gasoline, Gun, Thermite, Pans
