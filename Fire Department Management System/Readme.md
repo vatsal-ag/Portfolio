@@ -30,7 +30,7 @@ A lightweight, high-performance Command & Control system built using **Bash** an
 
 ---
 
-## 🛠 Tech Stack & Logic
+## Tech Stack & Logic
 * **Language:** Bash (Shell Scripting)
 * **Data Handling:** Flat-File CSV Database (Structured for portability and speed)
 * **Core Utilities:**
