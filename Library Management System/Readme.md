@@ -13,7 +13,8 @@ A robust, console-based Library Management System implemented in **C**. This pro
 ### **Core Functionalities**
 * **Book Management:** Add, edit, delete, and list books with full attribute tracking.
 * **Search System:** Search by unique ID or use "Advanced Search" (Title/Author/Genre).
-* **Borrowing Logic:** * Faculty: 30-day limit.
+* **Borrowing Logic:**
+    * Faculty: 30-day limit.
     * Students: 15-day limit.
     * Automatic Fine: ₹10/day for overdue items.
 * **Reporting:** Generate custom text-based reports filtered by user and date.
