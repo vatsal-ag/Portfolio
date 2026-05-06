@@ -1,6 +1,6 @@
 # Personal Portfolio
 
-This repository contains the source code for my personal portfolio website, which showcases my projects, skills, and technical experience.
+This repository contains my projects which showcases my projects, skills, and technical experience.
 
 ## Overview
 The portfolio is designed to provide a comprehensive view of my journey as a developer. It includes detailed descriptions of the applications I have built, the technologies I am proficient in, and my ongoing commitment to continuous learning.
