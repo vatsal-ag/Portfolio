@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fraud Detection Dashboard</title>
+    <style>
+      :root {
+        --primary: #2c3e50;
+        --danger: #e74c3c;
+        --warning: #f39c12;
+        --success: #27ae60;
+        --bg: #f4f7f6;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg);
+        color: var(--primary);
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+      }
+
+      /* Form Styling */
+      .upload-section {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      input[type="file"] {
+        margin-bottom: 10px;
+      }
+
+      button {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        opacity: 0.9;
+      }
+
+      /* Summary Cards */
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .card {
+        padding: 15px;
+        text-align: center;
+        border-radius: 6px;
+        background: #fff;
+        border: 1px solid #ddd;
+      }
+
+      .card span {
+        display: block;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .fraud-count {
+        color: var(--danger);
+      }
+
+      /* Table Styling */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f8f9fa;
+      }
+
+      /* Risk Badges */
+      .badge {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+        color: white;
+      }
+      .bg-HIGH {
+        background-color: var(--danger);
+      }
+      .bg-MEDIUM {
+        background-color: var(--warning);
+      }
+      .bg-LOW {
+        background-color: var(--success);
+      }
+
+      #loading {
+        display: none;
+        color: #666;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Transaction Analysis</h2>
+
+      <div class="upload-section">
+        <form id="uploadForm">
+          <input type="file" id="fileInput" accept=".csv" required />
+          <button type="submit" id="submitBtn">Analyze File</button>
+        </form>
+        <p id="loading">Processing transactions... please wait.</p>
+      </div>
+
+      <div class="summary-grid">
+        <div class="card">Total <span id="total">0</span></div>
+        <div class="card">
+          Fraud <span id="fraud" class="fraud-count">0</span>
+        </div>
+        <div class="card">Normal <span id="normal">0</span></div>
+      </div>
+
+      <h3>Detailed Results</h3>
+      <table id="resultsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Fraud Prob.</th>
+            <th>Prediction</th>
+            <th>Risk Level</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <script>
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const fileInput = document.getElementById("fileInput");
+          const loading = document.getElementById("loading");
+          const submitBtn = document.getElementById("submitBtn");
+
+          if (!fileInput.files[0]) return;
+
+          // UI Feedback
+          loading.style.display = "block";
+          submitBtn.disabled = true;
+
+          let formData = new FormData();
+          formData.append("file", fileInput.files[0]);
+
+          fetch("/analyze", {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              loading.style.display = "none";
+              submitBtn.disabled = false;
+
+              if (data.error) {
+                alert("Error: " + data.error);
+                return;
+              }
+
+              // Update Summary
+              document.getElementById("total").innerText = data.summary.total;
+              document.getElementById("fraud").innerText = data.summary.fraud;
+              document.getElementById("normal").innerText = data.summary.normal;
+
+              // Update Table
+              let tableBody = document.getElementById("tableBody");
+              tableBody.innerHTML = "";
+
+              data.results.forEach((row) => {
+                let tr = document.createElement("tr");
+                tr.innerHTML = `
+                <td>${row.id}</td>
+                <td>$${row.amount.toFixed(2)}</td>
+                <td>${row.fraud_probability}%</td>
+                <td>${row.prediction === 1 ? "🚩 Fraud" : "✅ Safe"}</td>
+                <td><span class="badge bg-${row.risk}">${row.risk}</span></td>
+            `;
+                tableBody.appendChild(tr);
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+              loading.style.display = "none";
+              submitBtn.disabled = false;
+              alert("An error occurred during analysis.");
+            });
+        });
+    </script>
+  </body>
+</html>

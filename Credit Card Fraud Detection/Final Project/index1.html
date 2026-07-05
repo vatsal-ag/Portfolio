@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fraud Detection</title>
+</head>
+<body>
+
+<h2>Upload Transaction File</h2>
+
+<form id="uploadForm">
+    <input type="file" id="fileInput" required>
+    <button type="submit">Analyze</button>
+</form>
+
+<h2>Analysis Results</h2>
+
+<p>Total Transactions: <span id="total"></span></p>
+<p>Fraud Detected: <span id="fraud"></span></p>
+<p>Normal Transactions: <span id="normal"></span></p>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Fraud %</th>
+            <th>Prediction</th>
+            <th>Risk</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+</table>
+
+<script>
+document.getElementById("uploadForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let file = document.getElementById("fileInput").files[0];
+    let formData = new FormData();
+    formData.append("file", file);
+
+    fetch("/analyze", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        console.log(data);  // DEBUG LINE
+
+        // FIXED: correct keys
+        document.getElementById("total").innerText = data.summary.total;
+        document.getElementById("fraud").innerText = data.summary.fraud;
+        document.getElementById("normal").innerText = data.summary.normal;
+
+        let table = document.getElementById("tableBody");
+        table.innerHTML = "";
+
+        data.results.forEach(row => {
+            let tr = `
+                <tr>
+                    <td>${row.id}</td>
+                    <td>${row.amount}</td>
+                    <td>${row.prob}%</td>
+                    <td>${row.prediction}</td>
+                    <td>${row.risk}</td>
+                </tr>
+            `;
+            table.innerHTML += tr;
+        });
+    })
+    .catch(err => console.error(err));
+});
+</script>
+
+</body>
+</html>

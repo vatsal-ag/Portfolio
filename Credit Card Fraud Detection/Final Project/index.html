@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fraud Detection System</title>
+    <style>
+      /* Color Palette and Variables */
+      :root {
+        --primary-dark: #2c3e50;
+        --accent-blue: #3498db;
+        --danger: #e74c3c; /* Red for High Risk */
+        --warning: #f39c12; /* Orange for Medium Risk */
+        --success: #27ae60; /* Green for Low Risk */
+        --light-bg: #f8f9fa;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background-color: #ecf0f1;
+        margin: 0;
+        padding: 40px;
+        color: var(--primary-dark);
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        border-bottom: 2px solid var(--light-bg);
+        padding-bottom: 10px;
+      }
+
+      /* Upload Section */
+      .upload-card {
+        background: var(--light-bg);
+        padding: 25px;
+        border-radius: 8px;
+        text-align: center;
+        border: 2px dashed #bdc3c7;
+        margin-bottom: 30px;
+      }
+
+      button {
+        background-color: var(--accent-blue);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.3s;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+      }
+
+      /* Summary Stats */
+      .summary-container {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .stat-card {
+        flex: 1;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        background: white;
+        border: 1px solid #eee;
+      }
+
+      .stat-card h3 {
+        margin: 0;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #7f8c8d;
+      }
+      .stat-card span {
+        font-size: 28px;
+        font-weight: bold;
+        display: block;
+        margin-top: 5px;
+      }
+
+      #fraud {
+        color: var(--danger);
+      }
+      #normal {
+        color: var(--success);
+      }
+
+      /* Table Styling */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      th {
+        background-color: var(--primary-dark);
+        color: white;
+        text-align: left;
+        padding: 15px;
+      }
+
+      td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #eee;
+      }
+
+      /* Risk Badges */
+      .risk-badge {
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        color: white;
+        text-transform: uppercase;
+      }
+
+      .HIGH {
+        background-color: var(--danger);
+      }
+      .MEDIUM {
+        background-color: var(--warning);
+      }
+      .LOW {
+        background-color: var(--success);
+      }
+
+      .loading-text {
+        display: none;
+        color: var(--accent-blue);
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Transaction Analysis Dashboard</h2>
+
+      <div class="upload-card">
+        <form id="uploadForm">
+          <input type="file" id="fileInput" accept=".csv" required />
+          <button type="submit" id="btnText">Run Analysis</button>
+        </form>
+        <p id="loading" class="loading-text">
+          Analyzing patterns... please wait.
+        </p>
+      </div>
+
+      <div class="summary-container">
+        <div class="stat-card">
+          <h3>Total Analyzed</h3>
+          <span id="total">0</span>
+        </div>
+        <div class="stat-card">
+          <h3>Fraud Suspected</h3>
+          <span id="fraud">0</span>
+        </div>
+        <div class="stat-card">
+          <h3>Normal</h3>
+          <span id="normal">0</span>
+        </div>
+      </div>
+
+      <h3>Transaction Detail</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Fraud Probability</th>
+            <th>Result</th>
+            <th>Risk Level</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <script>
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const file = document.getElementById("fileInput").files[0];
+          const loading = document.getElementById("loading");
+          const btnText = document.getElementById("btnText");
+
+          loading.style.display = "block";
+          btnText.disabled = true;
+
+          let formData = new FormData();
+          formData.append("file", file);
+
+          fetch("/analyze", {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              loading.style.display = "none";
+              btnText.disabled = false;
+
+              if (data.error) {
+                alert(data.error);
+                return;
+              }
+
+              // Summary Update
+              document.getElementById("total").innerText = data.summary.total;
+              document.getElementById("fraud").innerText = data.summary.fraud;
+              document.getElementById("normal").innerText = data.summary.normal;
+
+              // Table Update
+              let table = document.getElementById("tableBody");
+              table.innerHTML = "";
+
+              data.results.forEach((row) => {
+                let tr = `
+                <tr>
+                    <td>#${row.id}</td>
+                    <td>$${row.amount.toLocaleString()}</td>
+                    <td>${row.fraud_probability}%</td>
+                    <td>${row.prediction === 1 ? "🚩 Flagged" : "✅ Verified"}</td>
+                    <td><span class="risk-badge ${row.risk}">${row.risk}</span></td>
+                </tr>
+            `;
+                table.innerHTML += tr;
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+              loading.style.display = "none";
+              btnText.disabled = false;
+            });
+        });
+    </script>
+  </body>
+</html>
