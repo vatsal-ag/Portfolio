@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cyber Legal Guidance System</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #070b12;
+    --panel: #0d1520;
+    --border: #1a2f4a;
+    --accent: #00d4ff;
+    --accent2: #ff6b2b;
+    --accent3: #00ff88;
+    --text: #c8e0f0;
+    --muted: #4a6a8a;
+    --danger: #ff3860;
+    --warn: #ffdd57;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, #001a3a44 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, #00d4ff0d 0%, transparent 50%);
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0a1220cc;
+    backdrop-filter: blur(8px);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+  .logo span { color: var(--accent); }
+  .badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    background: #00d4ff15;
+    border: 1px solid #00d4ff40;
+    color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+  }
+  .clock {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex; gap: 4px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+  .tab {
+    padding: 10px 22px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--muted);
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-bottom: none;
+    background: none;
+    border-radius: 4px 4px 0 0;
+    transition: all 0.2s;
+    position: relative; top: 1px;
+  }
+  .tab:hover { color: var(--accent); }
+  .tab.active {
+    color: var(--accent);
+    border-color: var(--border);
+    background: var(--panel);
+    border-bottom-color: var(--panel);
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── PANELS ── */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .panel-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .panel-title::before {
+    content: '';
+    display: block;
+    width: 4px; height: 18px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  /* ── FORM ELEMENTS ── */
+  label {
+    display: block;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  input[type="text"], input[type="date"], textarea, select {
+    width: 100%;
+    background: #05090f;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.95rem;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px #00d4ff18;
+  }
+  textarea { min-height: 90px; resize: vertical; }
+  select option { background: #0d1520; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 11px 28px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+  }
+  .btn-primary:hover { background: #33dcff; transform: translateY(-1px); box-shadow: 0 4px 20px #00d4ff44; }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:hover { background: #ff5577; }
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-sm { padding: 7px 16px; font-size: 0.8rem; }
+  .btn-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+
+  /* ── RESULT CARD ── */
+  .result-card {
+    background: #05090f;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 22px;
+    margin-top: 20px;
+    display: none;
+  }
+  .result-card.show { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+  .confidence-bar-wrap { margin: 12px 0 20px; }
+  .confidence-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; }
+  .confidence-bar { height: 6px; background: #1a2f4a; border-radius: 3px; overflow: hidden; }
+  .confidence-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent3)); border-radius: 3px; transition: width 0.6s ease; }
+
+  .crime-badge {
+    display: inline-block;
+    background: #ff6b2b22;
+    border: 1px solid var(--accent2);
+    color: var(--accent2);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  /* ── LEGAL SECTIONS ── */
+  .section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .legal-card {
+    background: #0a1220;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 14px 16px;
+  }
+  .legal-card.it { border-left-color: var(--accent2); }
+  .legal-card .sec-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+  .legal-card.it .sec-num { color: var(--accent2); }
+  .legal-card .sec-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 4px 0;
+  }
+  .legal-card .sec-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── STEPS ── */
+  .steps-list { list-style: none; margin: 12px 0; }
+  .steps-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid #1a2f4a44;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .steps-list li:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    background: var(--accent);
+    color: #000;
+    padding: 2px 7px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-weight: 700;
+  }
+
+  /* ── SEARCH TAB ── */
+  .search-results { margin-top: 20px; }
+  .search-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 14px;
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .search-card.show { display: block; }
+  .tag { display: inline-block; background: #00d4ff15; border: 1px solid #00d4ff40; color: var(--accent); font-size: 0.72rem; padding: 2px 8px; border-radius: 2px; margin: 3px 3px 0 0; font-family: 'Share Tech Mono', monospace; }
+
+  /* ── CONTACTS ── */
+  .contacts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .contact-card {
+    background: #05090f;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .contact-icon { font-size: 1.6rem; }
+  .contact-name { font-size: 0.82rem; color: var(--muted); }
+  .contact-val { font-family: 'Share Tech Mono', monospace; font-size: 1.05rem; color: var(--accent3); font-weight: 700; }
+
+  /* ── HANDOUT / REPORTS ── */
+  #handout-output {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.78rem;
+    background: #05090f;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px;
+    white-space: pre-wrap;
+    line-height: 1.7;
+    color: var(--accent3);
+    display: none;
+    margin-top: 20px;
+    max-height: 420px;
+    overflow-y: auto;
+  }
+  #handout-output.show { display: block; animation: fadeIn 0.3s ease; }
+
+  .reports-list { list-style: none; }
+  .report-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px;
+    background: #05090f;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.82rem;
+  }
+  .report-item .report-name { color: var(--accent); }
+
+  /* ── ALERT ── */
+  .alert {
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 0.88rem;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .alert.show { display: block; }
+  .alert-warn { background: #ffdd5718; border: 1px solid #ffdd5740; color: var(--warn); }
+  .alert-success { background: #00ff8818; border: 1px solid #00ff8840; color: var(--accent3); }
+  .alert-danger { background: #ff386018; border: 1px solid #ff386040; color: var(--danger); }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width: 700px) {
+    .form-grid, .section-grid, .contacts-grid { grid-template-columns: 1fr; }
+    header { flex-wrap: wrap; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">CYBER<span>LEGAL</span> GUIDANCE SYSTEM</div>
+  <div class="badge">BNS 2023 · IT ACT 2000</div>
+  <div class="clock" id="clock">--:--:--</div>
+</header>
+
+<div class="container">
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('identify', this)">🔍 Identify Crime</button>
+    <button class="tab" onclick="switchTab('search', this)">📘 Legal Sections</button>
+    <button class="tab" onclick="switchTab('handout', this)">📄 Generate Handout</button>
+    <button class="tab" onclick="switchTab('reports', this)">🗂 Saved Reports</button>
+    <button class="tab" onclick="switchTab('contacts', this)">🚨 Emergency</button>
+  </div>
+
+  <!-- ══ TAB 1: IDENTIFY ══ -->
+  <div class="tab-content active" id="tab-identify">
+    <div class="panel">
+      <div class="panel-title">Describe Your Incident</div>
+      <div class="alert alert-warn show">
+        ⚡ <strong>Golden Hour Alert:</strong> Report cybercrime within the first hour for maximum chance of fund recovery. Call <strong>1930</strong> immediately.
+      </div>
+      <label>What happened? (English or Hinglish)</label>
+      <textarea id="incident-desc" placeholder="Example: Mera UPI se ₹50,000 cut gaye, TXN ID 987654321. / My account was hacked and someone logged in. / I got a phishing email from fake bank..."></textarea>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="identifyCrime()">⚡ Analyse & Get Legal Guidance</button>
+        <button class="btn btn-ghost" onclick="clearIdentify()">Clear</button>
+      </div>
+    </div>
+
+    <div class="result-card" id="identify-result">
+      <div id="crime-badge-wrap"></div>
+      <div class="confidence-bar-wrap">
+        <div class="confidence-label"><span>Confidence Score</span><span id="conf-pct">0%</span></div>
+        <div class="confidence-bar"><div class="confidence-fill" id="conf-fill" style="width:0%"></div></div>
+      </div>
+
+      <div class="panel-title" style="font-size:0.95rem">📘 BNS 2023 Sections</div>
+      <div class="section-grid" id="bns-sections"></div>
+
+      <div class="panel-title" style="font-size:0.95rem; margin-top:20px">💻 IT Act 2000 Sections</div>
+      <div class="section-grid" id="it-sections"></div>
+
+      <hr class="divider"/>
+      <div class="panel-title" style="font-size:0.95rem">🚨 Immediate Action Steps</div>
+      <ul class="steps-list" id="steps-list"></ul>
+
+      <hr class="divider"/>
+      <div class="btn-group">
+        <button class="btn btn-primary btn-sm" onclick="goToHandout()">📄 Generate Complaint Handout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TAB 2: SEARCH ══ -->
+  <div class="tab-content" id="tab-search">
+    <div class="panel">
+      <div class="panel-title">Search Legal Sections</div>
+      <div class="form-grid">
+        <div>
+          <label>Search BNS Section</label>
+          <select id="bns-select" onchange="showBnsSection()">
+            <option value="">— Select BNS Section —</option>
+          </select>
+        </div>
+        <div>
+          <label>Search IT Act Section</label>
+          <select id="it-select" onchange="showItSection()">
+            <option value="">— Select IT Act Section —</option>
+          </select>
+        </div>
+      </div>
+      <div class="search-card" id="bns-result-card">
+        <div class="sec-num" id="bns-res-num"></div>
+        <div class="sec-title" style="font-family:Rajdhani;font-size:1.1rem;font-weight:700;color:#fff;margin:6px 0" id="bns-res-title"></div>
+        <div style="font-size:0.88rem;color:var(--text);margin-bottom:12px" id="bns-res-desc"></div>
+        <div id="bns-res-tags"></div>
+      </div>
+      <div class="search-card" id="it-result-card">
+        <div class="sec-num" style="color:var(--accent2)" id="it-res-num"></div>
+        <div class="sec-title" style="font-family:Rajdhani;font-size:1.1rem;font-weight:700;color:#fff;margin:6px 0" id="it-res-title"></div>
+        <div style="font-size:0.88rem;color:var(--text);margin-bottom:12px" id="it-res-desc"></div>
+        <div id="it-res-tags"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TAB 3: HANDOUT ══ -->
+  <div class="tab-content" id="tab-handout">
+    <div class="panel">
+      <div class="panel-title">Generate Complaint Handout</div>
+      <div class="form-grid">
+        <div>
+          <label>Your Full Name</label>
+          <input type="text" id="h-name" placeholder="Enter your name"/>
+        </div>
+        <div>
+          <label>Phone Number</label>
+          <input type="text" id="h-phone" placeholder="+91 XXXXXXXXXX"/>
+        </div>
+        <div>
+          <label>Date of Incident</label>
+          <input type="date" id="h-date"/>
+        </div>
+        <div>
+          <label>Amount Lost (₹)</label>
+          <input type="text" id="h-amount" placeholder="e.g. 50000"/>
+        </div>
+        <div>
+          <label>Transaction / Evidence ID</label>
+          <input type="text" id="h-txn" placeholder="UTR / TXN ID / Case No."/>
+        </div>
+        <div>
+          <label>Crime Type</label>
+          <select id="h-crime">
+            <option value="">— Select Crime Type —</option>
+          </select>
+        </div>
+      </div>
+      <label>Brief Description</label>
+      <textarea id="h-desc" placeholder="Briefly describe what happened..."></textarea>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="generateHandout()">📄 Generate Handout</button>
+        <button class="btn btn-ghost" onclick="downloadHandout()">⬇ Download as .txt</button>
+      </div>
+    </div>
+    <div id="handout-output"></div>
+  </div>
+
+  <!-- ══ TAB 4: REPORTS ══ -->
+  <div class="tab-content" id="tab-reports">
+    <div class="panel">
+      <div class="panel-title">Saved Reports</div>
+      <div class="alert alert-warn show" style="margin-bottom:16px">
+        ℹ Reports are saved in your browser's local session. They will be cleared when you close the tab.
+      </div>
+      <ul class="reports-list" id="reports-list">
+        <li style="color:var(--muted);font-size:0.9rem;padding:12px 0">No reports saved yet. Generate a handout first.</li>
+      </ul>
+    </div>
+    <div id="report-view" style="display:none">
+      <div class="panel">
+        <div class="panel-title">Report Preview</div>
+        <pre id="report-view-content" style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:var(--accent3);white-space:pre-wrap;line-height:1.7;max-height:420px;overflow-y:auto;background:#05090f;border:1px solid var(--border);padding:20px;border-radius:4px;"></pre>
+        <div class="btn-group" style="margin-top:14px">
+          <button class="btn btn-ghost btn-sm" onclick="closeReportView()">✕ Close</button>
+          <button class="btn btn-primary btn-sm" id="dl-report-btn">⬇ Download</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TAB 5: CONTACTS ══ -->
+  <div class="tab-content" id="tab-contacts">
+    <div class="panel">
+      <div class="panel-title">Emergency Contacts</div>
+      <div class="alert alert-danger show">
+        🚨 <strong>GOLDEN HOUR:</strong> Report cybercrime within the FIRST HOUR for maximum chance of fund recovery!
+      </div>
+      <div class="contacts-grid" id="contacts-grid"></div>
+    </div>
+    <div class="panel" style="margin-top:0">
+      <div class="panel-title">Where To File Complaint</div>
+      <ul class="steps-list">
+        <li><span class="step-num">01</span> Visit <strong style="color:var(--accent)">https://cybercrime.gov.in</strong> — File complaint online 24/7</li>
+        <li><span class="step-num">02</span> Call <strong style="color:var(--accent3)">1930</strong> — National Cybercrime Helpline (24/7, Free)</li>
+        <li><span class="step-num">03</span> Walk into the nearest <strong>Cyber Police Station</strong> with printed evidence</li>
+        <li><span class="step-num">04</span> For banking fraud, call your <strong>bank's fraud helpline</strong> to freeze the transaction simultaneously</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ══════════════════════════════════════════════
+//  KNOWLEDGE BASE
+// ══════════════════════════════════════════════
+const BNS = {
+  "318": { title:"Cheating", desc:"Whoever cheats shall be punished with imprisonment up to 3 years and/or fine.", crimes:["upi fraud","online fraud","fake seller","advance fee fraud","lottery fraud"] },
+  "319": { title:"Cheating by Personation", desc:"Pretending to be another person to deceive. Punishable up to 5 years.", crimes:["identity theft","fake profile","impersonation","fake account"] },
+  "316": { title:"Criminal Breach of Trust", desc:"Dishonest misappropriation of entrusted property. Punishable up to 7 years.", crimes:["investment fraud","ponzi scheme","broker fraud","financial misappropriation"] },
+  "111": { title:"Organised Crime", desc:"New BNS section covering organized criminal syndicates including cyber fraud networks.", crimes:["syndicate fraud","gang fraud","organised scam","coordinated attack"] },
+  "308": { title:"Extortion", desc:"Intentionally putting a person in fear to deliver property. Up to 3 years imprisonment.", crimes:["sextortion","blackmail","ransomware","extortion","threatening"] },
+  "336": { title:"Forgery", desc:"Making a false document or electronic record with intent to cause harm. Up to 2 years.", crimes:["fake document","forged cheque","fake id","document fraud"] },
+  "338": { title:"Forgery of Valuable Security", desc:"Forgery of cheques, wills, or electronic records. Up to 7 years.", crimes:["cheque fraud","fake bank document","forged signature"] },
+};
+
+const ITA = {
+  "66":  { title:"Computer-Related Offences", desc:"Hacking, data theft, spreading viruses. Up to 3 years and/or ₹5 lakh fine.", crimes:["hacking","account hack","phone hack","data breach","virus","malware"] },
+  "66C": { title:"Identity Theft", desc:"Fraudulently using another person's password or unique ID. Up to 3 years.", crimes:["password stolen","otp fraud","sim swap","identity theft","credential theft"] },
+  "66D": { title:"Cheating by Personation via Computer", desc:"Impersonating using a computer resource. Up to 3 years and ₹1 lakh fine.", crimes:["fake email","phishing","spear phishing","spoofing","fake website"] },
+  "66E": { title:"Violation of Privacy", desc:"Capturing/publishing private images without consent. Up to 3 years and ₹2 lakh fine.", crimes:["sextortion","morphed photo","privacy violation","revenge porn","voyeurism"] },
+  "67":  { title:"Publishing Obscene Material", desc:"Publishing obscene content electronically. Up to 5 years and ₹10 lakh fine.", crimes:["obscene content","pornographic content","morphed image circulated"] },
+  "43":  { title:"Penalty for Damage to Computer", desc:"Unauthorized access, data theft, denial of service. Civil liability for compensation.", crimes:["unauthorized access","data theft","dos attack","ddos","system damage"] },
+  "72":  { title:"Breach of Confidentiality & Privacy", desc:"Disclosing personal data obtained in a fiduciary role without consent. Up to 2 years.", crimes:["data leak","personal data sold","breach of confidentiality"] },
+};
+
+const CRIME_MAP = {
+  upi_fraud:         { label:"UPI / Payment Fraud",     bns:["318"],       it:["66C","66D"], steps:["Call 1930 (National Cybercrime Helpline) IMMEDIATELY","Call your bank fraud helpline to freeze the transaction","File at cybercrime.gov.in within the Golden Hour","Note the Transaction ID (UTR/TXN No.) as evidence","Take screenshots of all messages and transactions"] },
+  hacking:           { label:"Account / Device Hacking", bns:["316"],       it:["66","43"],   steps:["Change all passwords immediately from a DIFFERENT device","Enable 2-Factor Authentication on all accounts","Call 1930 (National Cybercrime Helpline)","Contact your bank to block any linked accounts","File FIR at nearest cyber police station"] },
+  phishing:          { label:"Phishing / Fake Link",     bns:["318","319"], it:["66D","66C"], steps:["Do NOT click any more suspicious links","Call 1930 (National Cybercrime Helpline)","Report the phishing URL to Google Safe Browsing","Inform your bank if financial details were shared","File complaint at cybercrime.gov.in"] },
+  identity_theft:    { label:"Identity Theft",           bns:["319","336"], it:["66C","66D"], steps:["Report to UIDAI if Aadhaar is misused: 1947","Call 1930 (National Cybercrime Helpline)","Alert your bank to watch for unauthorized activities","File a police complaint with all evidence","Notify credit bureaus (CIBIL) about potential fraud"] },
+  sextortion:        { label:"Sextortion / Blackmail",   bns:["308"],       it:["66E","67"],  steps:["Do NOT pay the blackmailer under any circumstance","Call 1930 IMMEDIATELY — dedicated team available","Block the blackmailer on ALL platforms","Preserve all chat screenshots as evidence","File at cybercrime.gov.in — Women/Child cell available"] },
+  investment_fraud:  { label:"Investment / Crypto Fraud",bns:["316","318"], it:["66","66D"],  steps:["Stop ALL further transactions immediately","Call 1930 (National Cybercrime Helpline)","Report to SEBI if stock/crypto fraud: 1800-266-7575","Collect all payment receipts and conversation records","File complaint at cybercrime.gov.in"] },
+  data_breach:       { label:"Data Breach / Data Leak",  bns:["316"],       it:["43","72"],   steps:["Change all passwords and enable 2FA immediately","Monitor your bank accounts for suspicious activity","Report to CERT-In: incident@cert-in.org.in","Call 1930 (National Cybercrime Helpline)","File FIR at cyber police station"] },
+  online_harassment: { label:"Online Harassment / Stalking",bns:["308"],    it:["66E","67"],  steps:["Block the harasser on all platforms","Report the account on the respective platform","Preserve all screenshots as evidence","Call 1930 or visit cybercrime.gov.in","Contact Women Helpline: 181 (if applicable)"] },
+};
+
+const KEYWORDS = {
+  upi_fraud:        ["upi","gpay","phonepe","paytm","neft","rtgs","money deducted","balance","transaction","txn","utr","cheated online","paise cut","bank transfer","payment"],
+  hacking:          ["hack","hacked","compromised","account taken","phone hack","email hack","logged in","someone accessed","break in"],
+  phishing:         ["phishing","fake link","fake website","clicked link","otp asked","fake email","bank email","reward link","lottery link","suspicious link"],
+  identity_theft:   ["identity","aadhaar misuse","pan misuse","fake account my name","impersonating","someone using my id","sim swap","duplicate sim"],
+  sextortion:       ["sext","blackmail","nude","video call","intimate video","threatening","extortion","compromising photo","morphed"],
+  investment_fraud: ["investment","trading","crypto","returns","profit","broker","stock fraud","ponzi","mlm","multi level","doubling money","cryptocurrency"],
+  data_breach:      ["data leak","data breach","personal data","information stolen","database","records leaked"],
+  online_harassment:["harassment","trolling","abuse online","stalking","threatening message","cyberbullying","defamation","fake post about me"],
+};
+
+const CONTACTS = [
+  { icon:"📞", name:"National Cybercrime Helpline", val:"1930" },
+  { icon:"🌐", name:"Cyber Crime Portal", val:"cybercrime.gov.in" },
+  { icon:"👩", name:"Women Helpline", val:"181" },
+  { icon:"🚔", name:"Police Emergency", val:"100" },
+  { icon:"🔐", name:"CERT-In (Data Breach)", val:"incident@cert-in.org.in" },
+  { icon:"🏦", name:"RBI Fraud Helpline", val:"14440" },
+  { icon:"📈", name:"SEBI (Investment Fraud)", val:"1800-266-7575" },
+  { icon:"🪪", name:"UIDAI (Aadhaar Misuse)", val:"1947" },
+];
+
+// ══════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════
+let savedReports = [];
+let currentHandoutText = "";
+
+function init() {
+  // Clock
+  setInterval(() => {
+    document.getElementById('clock').textContent = new Date().toLocaleTimeString('en-IN');
+  }, 1000);
+
+  // Populate BNS select
+  const bs = document.getElementById('bns-select');
+  Object.entries(BNS).forEach(([k,v]) => {
+    bs.innerHTML += `<option value="${k}">Section ${k}: ${v.title}</option>`;
+  });
+
+  // Populate IT Act select
+  const its = document.getElementById('it-select');
+  Object.entries(ITA).forEach(([k,v]) => {
+    its.innerHTML += `<option value="${k}">Section ${k}: ${v.title}</option>`;
+  });
+
+  // Populate handout crime select
+  const hc = document.getElementById('h-crime');
+  Object.entries(CRIME_MAP).forEach(([k,v]) => {
+    hc.innerHTML += `<option value="${k}">${v.label}</option>`;
+  });
+
+  // Set today's date
+  document.getElementById('h-date').valueAsDate = new Date();
+
+  // Contacts grid
+  const cg = document.getElementById('contacts-grid');
+  CONTACTS.forEach(c => {
+    cg.innerHTML += `
+      <div class="contact-card">
+        <div class="contact-icon">${c.icon}</div>
+        <div><div class="contact-name">${c.name}</div><div class="contact-val">${c.val}</div></div>
+      </div>`;
+  });
+}
+
+// ══════════════════════════════════════════════
+//  TAB SWITCHING
+// ══════════════════════════════════════════════
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ══════════════════════════════════════════════
+//  CRIME IDENTIFICATION
+// ══════════════════════════════════════════════
+function detectCrime(text) {
+  text = text.toLowerCase();
+  let best = null, bestScore = 0;
+  for (const [crime, kws] of Object.entries(KEYWORDS)) {
+    let score = kws.reduce((acc, kw) => acc + (text.includes(kw) ? 1 : 0), 0);
+    if (score > bestScore) { bestScore = score; best = crime; }
+  }
+  if (!best) return null;
+  const conf = Math.min(99, 60 + bestScore * 13);
+  return { crime: best, confidence: conf };
+}
+
+function identifyCrime() {
+  const desc = document.getElementById('incident-desc').value.trim();
+  if (!desc) { alert('Please describe your incident first.'); return; }
+
+  const result = detectCrime(desc);
+  const card = document.getElementById('identify-result');
+
+  if (!result) {
+    card.classList.add('show');
+    card.innerHTML = `<div class="alert alert-danger show">Could not identify crime type. Please use the Handout tab to select manually, or try more keywords.</div>`;
+    return;
+  }
+
+  const { crime, confidence } = result;
+  const cm = CRIME_MAP[crime];
+
+  // Badge
+  document.getElementById('crime-badge-wrap').innerHTML = `<div class="crime-badge">⚠ ${cm.label}</div>`;
+
+  // Confidence
+  document.getElementById('conf-pct').textContent = confidence + '%';
+  setTimeout(() => { document.getElementById('conf-fill').style.width = confidence + '%'; }, 50);
+
+  // BNS
+  const bnsEl = document.getElementById('bns-sections');
+  bnsEl.innerHTML = cm.bns.map(sec => `
+    <div class="legal-card">
+      <div class="sec-num">BNS SECTION ${sec}</div>
+      <div class="sec-title">${BNS[sec]?.title || ''}</div>
+      <div class="sec-desc">${BNS[sec]?.desc || ''}</div>
+    </div>`).join('');
+
+  // IT Act
+  const itEl = document.getElementById('it-sections');
+  itEl.innerHTML = cm.it.map(sec => `
+    <div class="legal-card it">
+      <div class="sec-num">IT ACT SECTION ${sec}</div>
+      <div class="sec-title">${ITA[sec]?.title || ''}</div>
+      <div class="sec-desc">${ITA[sec]?.desc || ''}</div>
+    </div>`).join('');
+
+  // Steps
+  const stepsEl = document.getElementById('steps-list');
+  stepsEl.innerHTML = cm.steps.map((s, i) =>
+    `<li><span class="step-num">0${i+1}</span>${s}</li>`).join('');
+
+  card.classList.add('show');
+
+  // Pre-fill handout
+  document.getElementById('h-crime').value = crime;
+  document.getElementById('h-desc').value = desc;
+}
+
+function clearIdentify() {
+  document.getElementById('incident-desc').value = '';
+  document.getElementById('identify-result').classList.remove('show');
+}
+
+function goToHandout() {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-handout').classList.add('active');
+  document.querySelectorAll('.tab')[2].classList.add('active');
+}
+
+// ══════════════════════════════════════════════
+//  SEARCH
+// ══════════════════════════════════════════════
+function showBnsSection() {
+  const sec = document.getElementById('bns-select').value;
+  const card = document.getElementById('bns-result-card');
+  if (!sec) { card.classList.remove('show'); return; }
+  const d = BNS[sec];
+  document.getElementById('bns-res-num').textContent = 'BNS SECTION ' + sec;
+  document.getElementById('bns-res-title').textContent = d.title;
+  document.getElementById('bns-res-desc').textContent = d.desc;
+  document.getElementById('bns-res-tags').innerHTML = d.crimes.map(c => `<span class="tag">${c}</span>`).join('');
+  card.classList.add('show');
+}
+
+function showItSection() {
+  const sec = document.getElementById('it-select').value;
+  const card = document.getElementById('it-result-card');
+  if (!sec) { card.classList.remove('show'); return; }
+  const d = ITA[sec];
+  document.getElementById('it-res-num').textContent = 'IT ACT SECTION ' + sec;
+  document.getElementById('it-res-title').textContent = d.title;
+  document.getElementById('it-res-desc').textContent = d.desc;
+  document.getElementById('it-res-tags').innerHTML = d.crimes.map(c => `<span class="tag">${c}</span>`).join('');
+  card.classList.add('show');
+}
+
+// ══════════════════════════════════════════════
+//  HANDOUT GENERATION
+// ══════════════════════════════════════════════
+function generateHandout() {
+  const name   = document.getElementById('h-name').value.trim() || 'Not Provided';
+  const phone  = document.getElementById('h-phone').value.trim() || 'Not Provided';
+  const date   = document.getElementById('h-date').value || 'Not Provided';
+  const amount = document.getElementById('h-amount').value.trim() || '0';
+  const txn    = document.getElementById('h-txn').value.trim() || 'N/A';
+  const crime  = document.getElementById('h-crime').value;
+  const desc   = document.getElementById('h-desc').value.trim() || 'Not Provided';
+
+  if (!crime) { alert('Please select a crime type.'); return; }
+
+  const cm = CRIME_MAP[crime];
+  const now = new Date().toLocaleString('en-IN');
+
+  const bnsLines = cm.bns.map(s => `  BNS Section ${s}: ${BNS[s]?.title}\n  → ${BNS[s]?.desc}`).join('\n\n');
+  const itLines  = cm.it.map(s  => `  IT Act Sec ${s}: ${ITA[s]?.title}\n  → ${ITA[s]?.desc}`).join('\n\n');
+  const stepLines = cm.steps.map((s, i) => `  Step ${i+1}: ${s}`).join('\n');
+
+  currentHandoutText = `
+${'='.repeat(60)}
+       CYBER CRIME COMPLAINT HANDOUT
+       Generated by Cyber Legal Guidance System
+       Powered by BNS 2023 & IT Act 2000
+${'='.repeat(60)}
+
+VICTIM INFORMATION
+  Name          : ${name}
+  Phone         : ${phone}
+  Date of Crime : ${date}
+  Report Date   : ${now}
+
+INCIDENT DETAILS
+  Crime Type    : ${cm.label.toUpperCase()}
+  Description   : ${desc}
+  Amount Lost   : ₹${amount}
+  Transaction ID: ${txn}
+
+APPLICABLE LEGAL SECTIONS
+${'─'.repeat(60)}
+BHARATIYA NYAYA SANHITA (BNS) 2023:
+
+${bnsLines}
+
+INFORMATION TECHNOLOGY ACT 2000:
+
+${itLines}
+
+IMMEDIATE ACTION STEPS
+${'─'.repeat(60)}
+${stepLines}
+
+WHERE TO FILE YOUR COMPLAINT
+${'─'.repeat(60)}
+  1. Online  : https://cybercrime.gov.in
+  2. Helpline: 1930 (National Cybercrime Helpline — 24/7)
+  3. Offline : Nearest Cyber Police Station
+
+${'─'.repeat(60)}
+DISCLAIMER: This handout is for informational purposes only.
+Please consult a qualified legal professional for legal advice.
+This system uses BNS 2023 which replaced IPC from July 2024.
+${'='.repeat(60)}
+`;
+
+  const out = document.getElementById('handout-output');
+  out.textContent = currentHandoutText;
+  out.classList.add('show');
+
+  // Save to reports
+  const rpt = { name: `${name} — ${cm.label}`, date: now, content: currentHandoutText };
+  savedReports.push(rpt);
+  renderReports();
+}
+
+function downloadHandout() {
+  if (!currentHandoutText) { alert('Generate a handout first.'); return; }
+  const blob = new Blob([currentHandoutText], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'cyber_complaint_handout.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ══════════════════════════════════════════════
+//  REPORTS
+// ══════════════════════════════════════════════
+function renderReports() {
+  const ul = document.getElementById('reports-list');
+  if (savedReports.length === 0) {
+    ul.innerHTML = '<li style="color:var(--muted);font-size:0.9rem;padding:12px 0">No reports saved yet.</li>';
+    return;
+  }
+  ul.innerHTML = savedReports.map((r, i) => `
+    <li class="report-item">
+      <div>
+        <div class="report-name">${r.name}</div>
+        <div style="color:var(--muted);font-size:0.75rem;margin-top:3px">${r.date}</div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-ghost btn-sm" onclick="viewReport(${i})">View</button>
+        <button class="btn btn-primary btn-sm" onclick="downloadReport(${i})">⬇ Download</button>
+      </div>
+    </li>`).join('');
+}
+
+function viewReport(i) {
+  document.getElementById('report-view-content').textContent = savedReports[i].content;
+  document.getElementById('report-view').style.display = 'block';
+  document.getElementById('dl-report-btn').onclick = () => downloadReport(i);
+}
+
+function closeReportView() {
+  document.getElementById('report-view').style.display = 'none';
+}
+
+function downloadReport(i) {
+  const blob = new Blob([savedReports[i].content], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `report_${i+1}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+init();
+</script>
+</body>
+</html>
