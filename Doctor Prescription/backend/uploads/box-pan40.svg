@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <rect width="600" height="400" fill="#f8fafc" rx="16"/>
+  <!-- Medicine Box 3D Simulation -->
+  <rect x="50" y="50" width="500" height="300" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="3"/>
+  <rect x="50" y="50" width="500" height="40" rx="12" fill="#3b82f6"/>
+  <text x="70" y="76" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ffffff">ALKEM PHARMACEUTICALS</text>
+  
+  <text x="70" y="160" font-family="'Arial Black', sans-serif" font-size="48" font-weight="900" fill="#1e3a8a">PAN 40</text>
+  <text x="70" y="195" font-family="sans-serif" font-size="18" font-weight="bold" fill="#0284c7">Pantoprazole Gastro-resistant Tablets IP</text>
+  
+  <rect x="70" y="220" width="160" height="40" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="90" y="246" font-family="sans-serif" font-size="18" font-weight="bold" fill="#1d4ed8">Each tab: 40 mg</text>
+  
+  <text x="70" y="300" font-family="sans-serif" font-size="12" fill="#64748b">Rx - To be sold by retail on prescription only. 10 Tablets Strip.</text>
+  <circle cx="480" cy="180" r="30" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="465" y="187" font-family="sans-serif" font-size="20" font-weight="bold" fill="#1e40af">40</text>
+</svg>

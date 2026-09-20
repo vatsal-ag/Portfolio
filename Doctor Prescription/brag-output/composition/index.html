@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>RxVision AI — Launch Video</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #070a11;
+        font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+        color: #ffffff;
+      }
+      .font-display {
+        font-family: "Outfit", sans-serif;
+      }
+      .font-handwriting {
+        font-family: "Caveat", cursive;
+      }
+      .font-mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* Glows & Gradients */
+      .glow-emerald {
+        box-shadow: 0 0 50px -10px rgba(16, 185, 129, 0.4);
+      }
+      .glow-teal {
+        box-shadow: 0 0 60px -10px rgba(13, 148, 136, 0.45);
+      }
+      .glow-sky {
+        box-shadow: 0 0 50px -10px rgba(56, 189, 248, 0.4);
+      }
+      .glow-ambient {
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        border-radius: 50%;
+        filter: blur(140px);
+        pointer-events: none;
+        opacity: 0.28;
+      }
+
+      /* Prescription paper texture look */
+      .rx-paper {
+        background: linear-gradient(135deg, #fefefe 0%, #f4f6f9 100%);
+        box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+      .rx-watermark {
+        font-family: "Outfit", sans-serif;
+        font-size: 140px;
+        font-weight: 900;
+        color: rgba(13, 148, 136, 0.08);
+      }
+
+      /* Glassmorphism Card */
+      .glass-card {
+        background: rgba(15, 23, 42, 0.75);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+      }
+      .glass-highlight {
+        background: rgba(13, 148, 136, 0.12);
+        border: 1px solid rgba(45, 212, 191, 0.4);
+      }
+    </style>
+
+    <script>
+      window.__tailwindReady = new Promise(function (resolve) {
+        var loaded = document.readyState === "complete";
+        var resolved = false;
+        var observer;
+        function readTailwindCss() {
+          var styles = document.querySelectorAll("style");
+          for (var i = styles.length - 1; i >= 0; i--) {
+            var text = styles[i].textContent || "";
+            if (text.indexOf("tailwindcss v") !== -1) return text;
+          }
+          return "";
+        }
+        function finish() {
+          if (resolved || !loaded || !readTailwindCss()) return;
+          resolved = true;
+          if (observer) observer.disconnect();
+          resolve(true);
+        }
+        observer = new MutationObserver(finish);
+        observer.observe(document.documentElement, {
+          childList: true,
+          subtree: true,
+          characterData: true,
+        });
+        if (loaded) {
+          finish();
+        } else {
+          window.addEventListener(
+            "load",
+            function () {
+              loaded = true;
+              finish();
+            },
+            { once: true }
+          );
+        }
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.2.4/dist/index.global.js"
+      integrity="sha384-v5YF9xS+gLRWdvrQ0u/WRbCkjSIH0NjHIPe8tBL1ZRrmI7PiSH6LLdzs0aAIMCuh"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="18"
+      data-width="1920"
+      data-height="1080"
+      class="relative w-[1920px] height-[1080px] h-[1080px] overflow-hidden bg-[#070a11] select-none"
+    >
+      <!-- Audio Elements -->
+      <audio
+        id="bg-music"
+        data-start="0"
+        data-duration="18"
+        data-track-index="1"
+        data-volume="0.36"
+        src="assets/music/track.mp3"
+      ></audio>
+      <audio
+        id="sfx-scan"
+        data-start="1.8"
+        data-duration="0.10"
+        data-track-index="2"
+        data-volume="0.65"
+        src="assets/sfx/interface/click_001.ogg"
+      ></audio>
+      <audio
+        id="sfx-synergy"
+        data-start="6.0"
+        data-duration="0.18"
+        data-track-index="3"
+        data-volume="0.75"
+        src="assets/sfx/impact/impactSoft_medium_001.ogg"
+      ></audio>
+      <audio
+        id="sfx-box"
+        data-start="10.5"
+        data-duration="0.11"
+        data-track-index="4"
+        data-volume="0.70"
+        src="assets/sfx/interface/drop_001.ogg"
+      ></audio>
+      <audio
+        id="sfx-hero"
+        data-start="15.5"
+        data-duration="1.48"
+        data-track-index="5"
+        data-volume="0.85"
+        src="assets/sfx/impact/impactBell_heavy_000.ogg"
+      ></audio>
+      <!-- Subtle Dynamic Ambient Glows that breathe -->
+      <div
+        id="ambient-glow-1"
+        data-layout-allow-overflow
+        class="glow-ambient bg-teal-500 top-[-100px] left-[-100px]"
+      ></div>
+      <div
+        id="ambient-glow-2"
+        data-layout-allow-overflow
+        class="glow-ambient bg-emerald-500 bottom-[-150px] right-[-100px]"
+      ></div>
+      <div
+        id="ambient-glow-3"
+        data-layout-allow-overflow
+        class="glow-ambient bg-sky-500 top-[40%] left-[35%]"
+      ></div>
+
+      <!-- Fixed Top Brand Watermark -->
+      <div
+        class="absolute top-10 left-16 z-50 flex items-center gap-3 bg-slate-900/80 px-4 py-2 rounded-full border border-slate-700/60"
+      >
+        <div
+          class="w-3 h-3 rounded-full bg-teal-400 animate-pulse"
+        ></div>
+        <span class="font-display font-extrabold tracking-wider text-sm text-teal-300">
+          RxVision AI
+        </span>
+        <span class="text-xs text-slate-400 border-l border-slate-700 pl-2">
+          Clinical Intelligence System
+        </span>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- SCENE 1: The Handwriting Dilemma & Instant OCR (0.0s - 4.2s) -->
+      <!-- ================================================================= -->
+      <div
+        id="scene-1"
+        class="absolute inset-0 flex flex-col items-center justify-center px-24 z-10"
+      >
+        <!-- Hook Header -->
+        <div id="s1-badge" class="mb-4">
+          <div
+            class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-teal-950/90 border border-teal-500/50 text-teal-300 text-base font-semibold tracking-wide"
+          >
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-400"></span>
+            PRESCRIPTION PROBLEM SOLVED
+          </div>
+        </div>
+
+        <h1
+          id="s1-title"
+          class="font-display text-7xl font-black text-center text-white tracking-tight leading-none mb-4"
+        >
+          CAN YOU READ YOUR DOCTOR'S HANDWRITING?
+        </h1>
+        <p
+          id="s1-subtitle"
+          class="text-2xl text-slate-300 font-medium max-w-4xl text-center mb-10"
+        >
+          Doctors write in hieroglyphics. Your stomach shouldn't pay the price.
+        </p>
+
+        <!-- Prescription & Scanner Container -->
+        <div id="s1-stage" class="relative w-[1120px] h-[480px]">
+          <!-- The Realistic Prescription Slip -->
+          <div
+            id="s1-rx-slip"
+            class="rx-paper absolute left-8 top-0 w-[500px] h-[460px] rounded-2xl p-8 text-slate-900 shadow-2xl overflow-hidden border border-slate-300"
+          >
+            <!-- Watermark -->
+            <div class="rx-watermark absolute right-4 bottom-0 select-none pointer-events-none" data-layout-allow-overflow data-layout-allow-occlusion aria-hidden="true" style="color: rgba(13, 148, 136, 0.12);">℞</div>
+            <!-- Header -->
+            <div class="flex items-center justify-between border-b border-slate-300 pb-4 mb-6">
+              <div>
+                <h3 class="font-bold text-slate-900 text-lg">City Memorial Hospital</h3>
+                <p class="text-xs text-slate-700">Dr. A. Sharma, MD, DM (Cardiology)</p>
+              </div>
+              <div class="text-right">
+                <p class="text-xs font-mono text-slate-700">Reg: #849204</p>
+                <p class="text-xs text-slate-700">Date: 20 Sep 2026</p>
+              </div>
+            </div>
+
+            <div class="text-2xl font-display font-bold text-teal-800 mb-4">℞</div>
+
+            <!-- Illegible Doctor's Handwriting -->
+            <div id="s1-cursive-container" class="space-y-6">
+              <div class="border-b border-dashed border-slate-300 pb-3">
+                <p class="font-handwriting text-5xl text-blue-900 leading-tight">
+                  Tab. Combiflam 400 BD x 5d
+                </p>
+                <p class="text-xs text-slate-700 mt-1 italic font-mono">
+                  [Cursive handwritten: Ibuprofen 400mg + Paracetamol 325mg]
+                </p>
+              </div>
+              <div class="border-b border-dashed border-slate-300 pb-3">
+                <p class="font-handwriting text-5xl text-blue-900 leading-tight">
+                  Cap. Pantocid 40 OD AC x 5d
+                </p>
+                <p class="text-xs text-slate-700 mt-1 italic font-mono">
+                  [Cursive handwritten: Pantoprazole 40mg]
+                </p>
+              </div>
+            </div>
+
+            <!-- Laser Scan Line -->
+            <div
+              id="s1-laser"
+              class="absolute left-0 right-0 top-0 h-1 bg-teal-400 shadow-[0_0_20px_4px_rgba(45,212,191,0.9)] opacity-0 z-20"
+            ></div>
+          </div>
+
+          <!-- Arrow / Process indicator -->
+          <div
+            id="s1-arrow"
+            class="absolute left-[540px] top-[190px] flex flex-col items-center justify-center text-teal-400"
+          >
+            <div class="px-3 py-1 rounded bg-teal-950/80 border border-teal-500/40 text-xs font-mono text-teal-300 mb-2">
+              OCR 0.3s
+            </div>
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </div>
+
+          <!-- Decoded Clinical Intelligence Cards (Right Side) -->
+          <div
+            id="s1-decoded-wrap"
+            class="absolute right-0 top-0 w-[520px] h-[460px] flex flex-col gap-4"
+          >
+            <!-- Card 1 -->
+            <div class="glass-card rounded-2xl p-6 border-l-4 border-l-teal-400 shadow-xl">
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-3 py-1 rounded-full bg-teal-950 text-teal-300 text-xs font-bold uppercase tracking-wider">
+                  Decoded #1 • Painkiller
+                </span>
+                <span class="text-xs font-mono text-emerald-400 font-bold">Confidence: 99.7%</span>
+              </div>
+              <h4 class="text-2xl font-bold text-white mb-1">Combiflam</h4>
+              <p class="text-sm text-slate-300">
+                Active: Ibuprofen (400mg) + Paracetamol (325mg)
+              </p>
+              <div class="mt-3 flex items-center gap-2 text-xs text-amber-300 font-medium bg-amber-950/40 px-3 py-1.5 rounded-lg border border-amber-600/30">
+                <span>⚠️ Common side effect: High stomach acidity & gastric irritation</span>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="glass-card rounded-2xl p-6 border-l-4 border-l-emerald-400 shadow-xl">
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 text-xs font-bold uppercase tracking-wider">
+                  Decoded #2 • Antacid / PPI
+                </span>
+                <span class="text-xs font-mono text-emerald-400 font-bold">Confidence: 99.4%</span>
+              </div>
+              <h4 class="text-2xl font-bold text-white mb-1">Pantocid 40</h4>
+              <p class="text-sm text-slate-300">
+                Active: Pantoprazole Sodium (40mg)
+              </p>
+              <div class="mt-3 flex items-center gap-2 text-xs text-emerald-300 font-medium bg-emerald-950/40 px-3 py-1.5 rounded-lg border border-emerald-500/30">
+                <span>🛡️ Proton Pump Inhibitor: Inhibits excess gastric acid secretion</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- SCENE 2: Synergy & Contraindication Safety Shield (4.2s - 8.8s) -->
+      <!-- ================================================================= -->
+      <div
+        id="scene-2"
+        class="absolute inset-0 flex flex-col items-center justify-center px-24 z-10 opacity-0 pointer-events-none"
+      >
+        <div id="s2-badge" class="mb-4">
+          <div
+            class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-950/90 border border-emerald-500/50 text-emerald-300 text-base font-semibold tracking-wide"
+          >
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            DRUG-DRUG SYNERGY INTELLIGENCE
+          </div>
+        </div>
+
+        <h2
+          id="s2-title"
+          class="font-display text-7xl font-black text-center text-white tracking-tight leading-none mb-3"
+        >
+          EVER WONDER WHY YOU GET TWO PILLS?
+        </h2>
+        <p
+          id="s2-subtitle"
+          class="text-2xl text-slate-300 font-medium max-w-4xl text-center mb-10"
+        >
+          RxVision AI explains the exact clinical reason doctors pair medications together.
+        </p>
+
+        <!-- Visual Synergy Showcase -->
+        <div class="relative w-[1200px] h-[460px] flex items-center justify-between">
+          <!-- Left Pill: Combiflam -->
+          <div
+            id="s2-left-card"
+            class="glass-card w-[350px] p-7 rounded-3xl border border-slate-700/80 glow-teal"
+          >
+            <div class="w-14 h-14 rounded-2xl bg-teal-900/60 border border-teal-500/40 flex items-center justify-center text-3xl mb-4">
+              💊
+            </div>
+            <div class="text-xs font-mono text-teal-400 font-bold uppercase tracking-wider mb-1">
+              Prescribed Drug A
+            </div>
+            <h3 class="text-3xl font-extrabold text-white mb-2">Combiflam</h3>
+            <p class="text-sm text-slate-300 mb-4">
+              Ibuprofen + Paracetamol. Fast-acting pain & fever relief.
+            </p>
+            <div class="p-3 bg-red-950/50 rounded-xl border border-red-500/40 text-red-300 text-xs font-semibold">
+              Side Effect: Gastric mucosa erosion & heartburn
+            </div>
+          </div>
+
+          <!-- Connecting Synergy Shield (Center) -->
+          <div
+            id="s2-center-shield"
+            class="relative z-20 w-[420px] glass-card glass-highlight rounded-3xl p-8 text-center glow-emerald border-2 border-emerald-400/80 shadow-2xl"
+          >
+            <div class="mx-auto w-20 h-20 rounded-full bg-emerald-950 border-2 border-emerald-400 flex items-center justify-center text-4xl mb-4 shadow-[0_0_30px_rgba(16,185,129,0.6)]">
+              🛡️
+            </div>
+            <div class="inline-block px-4 py-1.5 rounded-full bg-emerald-900/80 border border-emerald-400 text-xs font-bold text-emerald-200 tracking-wider uppercase mb-3">
+              Beneficial Synergy Detected
+            </div>
+            <h4 class="text-2xl font-black text-white leading-snug mb-3">
+              Gastric Mucosal Protection
+            </h4>
+            <p class="text-sm text-emerald-100 font-medium leading-relaxed mb-4">
+              "Pantocid is specifically prescribed to neutralize stomach acidity triggered by Combiflam painkillers, shielding against ulcers."
+            </p>
+            <div class="pt-3 border-t border-emerald-500/30 flex items-center justify-center gap-2 text-xs font-mono text-emerald-300 font-bold">
+              <span>ACTIVE CLINICAL PAIRING CONFIRMED</span>
+            </div>
+          </div>
+
+          <!-- Right Pill: Pantocid -->
+          <div
+            id="s2-right-card"
+            class="glass-card w-[350px] p-7 rounded-3xl border border-slate-700/80 glow-emerald"
+          >
+            <div class="w-14 h-14 rounded-2xl bg-emerald-900/60 border border-emerald-500/40 flex items-center justify-center text-3xl mb-4">
+              🧪
+            </div>
+            <div class="text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider mb-1">
+              Prescribed Drug B
+            </div>
+            <h3 class="text-3xl font-extrabold text-white mb-2">Pantocid 40</h3>
+            <p class="text-sm text-slate-300 mb-4">
+              Pantoprazole 40mg. Reduces stomach acid production.
+            </p>
+            <div class="p-3 bg-emerald-950/50 rounded-xl border border-emerald-500/40 text-emerald-300 text-xs font-semibold">
+              Protective Action: Counteracts NSAID gastric acidity
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Chronic Safety Alert Banner -->
+        <div
+          id="s2-chronic-banner"
+          class="mt-6 w-[1000px] glass-card px-8 py-3.5 rounded-2xl border border-teal-500/40 flex items-center justify-between"
+        >
+          <div class="flex items-center gap-3">
+            <span class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-sm font-bold text-white">
+              Chronic Profile Safety Cross-Check:
+            </span>
+            <span class="text-sm text-slate-300">
+              Grandpa's History: GERD, Type-2 Diabetes
+            </span>
+          </div>
+          <div class="px-4 py-1.5 rounded-full bg-emerald-950 border border-emerald-400 text-emerald-300 text-xs font-extrabold">
+            ✓ 0 HARMFUL INTERACTIONS DETECTED
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- SCENE 3: Chemist Box Verifier (8.8s - 13.2s) -->
+      <!-- ================================================================= -->
+      <div
+        id="scene-3"
+        class="absolute inset-0 flex flex-col items-center justify-center px-24 z-10 opacity-0 pointer-events-none"
+      >
+        <div id="s3-badge" class="mb-4">
+          <div
+            class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-sky-950/90 border border-sky-500/50 text-sky-300 text-base font-semibold tracking-wide"
+          >
+            <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
+            PHARMACY VERIFICATION ENGINE
+          </div>
+        </div>
+
+        <h2
+          id="s3-title"
+          class="font-display text-7xl font-black text-center text-white tracking-tight leading-none mb-3"
+        >
+          CHEMIST GAVE YOU A DIFFERENT BOX?
+        </h2>
+        <p
+          id="s3-subtitle"
+          class="text-2xl text-slate-300 font-medium max-w-4xl text-center mb-10"
+        >
+          Snap a photo of the medication box. AI verifies if it's the exact same medicine.
+        </p>
+
+        <!-- Box Comparison Showcase -->
+        <div class="relative w-[1140px] h-[460px] flex items-center justify-between">
+          <!-- Left: Prescription Item -->
+          <div
+            id="s3-card-prescribed"
+            class="glass-card w-[420px] p-8 rounded-3xl border border-slate-700"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-bold uppercase">
+                On Prescription
+              </span>
+              <span class="text-xs font-mono text-teal-400">Prescribed By Doctor</span>
+            </div>
+            <div class="h-32 bg-slate-800/80 rounded-2xl border border-slate-600 flex flex-col justify-center px-6 mb-4">
+              <span class="text-xs text-slate-400 font-mono">Brand Name:</span>
+              <h4 class="text-3xl font-black text-white">Pantocid 40</h4>
+              <p class="text-sm text-teal-300 font-medium mt-1">Pantoprazole 40mg</p>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Manufacturer: Sun Pharma Laboratories Ltd.<br />
+              Prescription strength: 40mg Gastro-resistant tablets
+            </p>
+          </div>
+
+          <!-- Center Comparison Match Badge -->
+          <div
+            id="s3-center-match"
+            class="w-[240px] flex flex-col items-center text-center z-20"
+          >
+            <div
+              id="s3-match-icon"
+              class="w-24 h-24 rounded-full bg-emerald-950 border-2 border-emerald-400 flex items-center justify-center text-5xl shadow-[0_0_40px_rgba(16,185,129,0.7)] mb-4"
+            >
+              ✓
+            </div>
+            <div class="px-4 py-2 rounded-xl bg-emerald-950/90 border border-emerald-400 text-emerald-300 font-mono text-xs font-black tracking-wider">
+              100% SALT MATCH
+            </div>
+          </div>
+
+          <!-- Right: Chemist Box Photo Scanned -->
+          <div
+            id="s3-card-chemist"
+            class="glass-card w-[420px] p-8 rounded-3xl border-2 border-emerald-500/80 glow-emerald"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 text-xs font-bold uppercase">
+                Patient Photo Scanned
+              </span>
+              <span class="text-xs font-mono text-emerald-400 font-bold">Chemist Given Box</span>
+            </div>
+            <div class="h-32 bg-emerald-950/40 rounded-2xl border border-emerald-500/40 flex flex-col justify-center px-6 mb-4">
+              <span class="text-xs text-emerald-400 font-mono">Scanned Brand:</span>
+              <h4 class="text-3xl font-black text-white">Pan 40</h4>
+              <p class="text-sm text-emerald-300 font-medium mt-1">Pantoprazole 40mg</p>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Manufacturer: Alkem Laboratories Ltd.<br />
+              Verification: <strong class="text-emerald-300">Safe Generic Equivalent (Identical Active Salt)</strong>
+            </p>
+          </div>
+        </div>
+
+        <!-- Verification Banner Bottom -->
+        <div
+          id="s3-verdict-banner"
+          class="mt-6 w-[1000px] glass-card glass-highlight px-8 py-3.5 rounded-2xl border border-emerald-400 flex items-center justify-between shadow-xl"
+        >
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <span class="text-base font-bold text-white">
+              Verification Verdict: Safe Generic Equivalent (Identical Active Salt)
+            </span>
+          </div>
+          <div class="px-4 py-1.5 rounded-full bg-emerald-500 text-slate-950 text-xs font-black uppercase">
+            Approved For Patient
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- SCENE 4: Senior Caretaker Meal Alarms & Hero Outro (13.2s - 18.0s) -->
+      <!-- ================================================================= -->
+      <div
+        id="scene-4"
+        class="absolute inset-0 flex flex-col items-center justify-center px-24 z-10 opacity-0 pointer-events-none"
+      >
+        <!-- Top Half: Caretaker Alarm Schedule (Shows 13.2s - 15.3s) -->
+        <div id="s4-caretaker-block" class="flex flex-col items-center w-full">
+          <div class="mb-4">
+            <div
+              class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-teal-950/90 border border-teal-500/50 text-teal-300 text-base font-semibold tracking-wide"
+            >
+              <span class="w-2.5 h-2.5 rounded-full bg-teal-400"></span>
+              ELDERLY CARETAKER ASSISTANT
+            </div>
+          </div>
+          <h2 class="font-display text-6xl font-black text-center text-white tracking-tight leading-none mb-3">
+            ALIGNED TO MEAL HABITS • NEVER MISS A DOSE
+          </h2>
+          <p class="text-2xl text-slate-300 font-medium max-w-4xl text-center mb-8">
+            Learns daily eating routines and schedules exact medicine alarms automatically.
+          </p>
+
+          <!-- Timeline Grid -->
+          <div class="grid grid-cols-3 gap-6 w-[1120px]">
+            <!-- Alarm 1 -->
+            <div class="glass-card p-6 rounded-2xl border-l-4 border-l-teal-400">
+              <div class="flex items-center justify-between text-xs font-mono text-teal-300 font-bold mb-2">
+                <span>08:00 AM</span>
+                <span class="px-2 py-0.5 rounded bg-teal-950 text-teal-300">ALARM SET</span>
+              </div>
+              <h4 class="text-xl font-bold text-white mb-1">Pantocid 40</h4>
+              <p class="text-xs text-slate-300">
+                Take 30 mins BEFORE breakfast on an empty stomach.
+              </p>
+            </div>
+
+            <!-- Routine Marker -->
+            <div class="glass-card p-6 rounded-2xl border-l-4 border-l-amber-400 bg-amber-950/20">
+              <div class="flex items-center justify-between text-xs font-mono text-amber-300 font-bold mb-2">
+                <span>08:30 AM</span>
+                <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300">HABIT SYNC</span>
+              </div>
+              <h4 class="text-xl font-bold text-white mb-1">🥣 Breakfast</h4>
+              <p class="text-xs text-slate-300">
+                Recorded senior routine: Warm oatmeal & tea.
+              </p>
+            </div>
+
+            <!-- Alarm 2 -->
+            <div class="glass-card p-6 rounded-2xl border-l-4 border-l-emerald-400">
+              <div class="flex items-center justify-between text-xs font-mono text-emerald-300 font-bold mb-2">
+                <span>09:00 AM</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300">ALARM SET</span>
+              </div>
+              <h4 class="text-xl font-bold text-white mb-1">Combiflam</h4>
+              <p class="text-xs text-slate-300">
+                Take 30 mins AFTER breakfast with full glass of water.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grand Hero Finale (Revealed at 15.3s to 18.0s) -->
+        <div
+          id="s4-hero-outro"
+          class="absolute inset-0 flex flex-col items-center justify-center text-center px-24 opacity-0"
+        >
+          <!-- Glowing Cross / Iris Logo -->
+          <div
+            id="s4-logo"
+            class="relative mb-6 w-32 h-32 rounded-3xl bg-gradient-to-tr from-teal-500 via-emerald-400 to-sky-400 p-1 shadow-[0_0_80px_rgba(45,212,191,0.7)]"
+          >
+            <div class="w-full h-full bg-[#070a11] rounded-[22px] flex items-center justify-center">
+              <div class="relative flex items-center justify-center">
+                <span class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-emerald-300 to-sky-300">
+                  ℞
+                </span>
+                <div class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 animate-ping" data-layout-allow-occlusion></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Name -->
+          <h1
+            id="s4-brand-name"
+            class="font-display text-8xl font-black text-white tracking-tight leading-none mb-4"
+          >
+            RxVision AI
+          </h1>
+
+          <!-- Tagline -->
+          <p
+            id="s4-tagline"
+            class="text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-emerald-200 to-sky-300 max-w-4xl mb-8"
+          >
+            Doctor Handwriting OCR • Medicine Synergy • Senior Caretaker
+          </p>
+
+          <!-- Badges & Compliance Row -->
+          <div
+            id="s4-badges"
+            class="flex items-center gap-6 mb-8"
+          >
+            <div class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/90 border border-teal-500/40 text-sm font-bold text-slate-200 shadow-lg">
+              <span class="text-teal-400 text-lg">🔒</span>
+              <span>HIPAA & IT Act 2000 Compliant</span>
+            </div>
+            <div class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/90 border border-emerald-500/40 text-sm font-bold text-slate-200 shadow-lg">
+              <span class="text-emerald-400 text-lg">🛡️</span>
+              <span>End-to-End Encrypted Health Vault</span>
+            </div>
+            <div class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/90 border border-sky-500/40 text-sm font-bold text-slate-200 shadow-lg">
+              <span class="text-sky-400 text-lg">⚡</span>
+              <span>Sub-Second OCR Inference</span>
+            </div>
+          </div>
+
+          <!-- Final Punchline -->
+          <div
+            id="s4-punchline"
+            class="text-xl font-mono tracking-wide text-slate-300 uppercase"
+          >
+            You built it. Your health is protected.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GSAP Animation Engine -->
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // ==========================================
+      // AUDIO-REACTIVE AMBIENT BACKGROUND GLOWS
+      // ==========================================
+      tl.to(
+        "#ambient-glow-1",
+        {
+          scale: 1.25,
+          opacity: 0.38,
+          duration: 3.5,
+          repeat: 4,
+          yoyo: true,
+          ease: "sine.inOut",
+        },
+        0
+      );
+      tl.to(
+        "#ambient-glow-2",
+        {
+          scale: 1.3,
+          opacity: 0.35,
+          duration: 4.2,
+          repeat: 3,
+          yoyo: true,
+          ease: "sine.inOut",
+        },
+        0.5
+      );
+
+      // ==========================================
+      // SCENE 1: (0.0s - 4.2s) - Doctor Handwriting & OCR
+      // ==========================================
+      // Initial states
+      tl.set("#scene-1", { opacity: 1 }, 0);
+      tl.fromTo(
+        "#s1-badge",
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        0.1
+      );
+      tl.fromTo(
+        "#s1-title",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+        0.2
+      );
+      tl.fromTo(
+        "#s1-subtitle",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+        0.4
+      );
+
+      // Prescription slip enters
+      tl.fromTo(
+        "#s1-rx-slip",
+        { opacity: 0, scale: 0.9, rotate: -2, y: 40 },
+        { opacity: 1, scale: 1, rotate: 0, y: 0, duration: 0.8, ease: "back.out(1.4)" },
+        0.5
+      );
+
+      // Scanner laser line activation & sweep
+      tl.to("#s1-laser", { opacity: 1, duration: 0.2 }, 1.7);
+      tl.fromTo(
+        "#s1-laser",
+        { y: 0 },
+        { y: 440, duration: 1.1, ease: "power1.inOut" },
+        1.8 // aligns with sfx-scan at 1.8s
+      );
+      tl.to("#s1-laser", { opacity: 0, duration: 0.2 }, 2.9);
+
+      // Decoded Cards reveal (beat-grid at 3.02s and 3.52s)
+      tl.fromTo(
+        "#s1-arrow",
+        { opacity: 0, scale: 0.5 },
+        { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" },
+        2.8
+      );
+      tl.fromTo(
+        "#s1-decoded-wrap > div:nth-child(1)",
+        { opacity: 0, x: 50, scale: 0.95 },
+        { opacity: 1, x: 0, scale: 1, duration: 0.5, ease: "power3.out" },
+        3.02 // beat-grid: 3.02s
+      );
+      tl.fromTo(
+        "#s1-decoded-wrap > div:nth-child(2)",
+        { opacity: 0, x: 50, scale: 0.95 },
+        { opacity: 1, x: 0, scale: 1, duration: 0.5, ease: "power3.out" },
+        3.52 // beat-grid: 3.52s
+      );
+
+      // Transition Out Scene 1
+      tl.to(
+        "#scene-1",
+        { opacity: 0, scale: 0.96, duration: 0.4, ease: "power2.in" },
+        4.1
+      );
+      tl.set("#scene-1", { display: "none" }, 4.5);
+
+      // ==========================================
+      // SCENE 2: (4.2s - 8.8s) - Synergy & Contraindications
+      // ==========================================
+      tl.set("#scene-2", { opacity: 1, pointerEvents: "auto" }, 4.2);
+      tl.fromTo(
+        "#s2-badge",
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        4.3
+      );
+      tl.fromTo(
+        "#s2-title",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+        4.4
+      );
+      tl.fromTo(
+        "#s2-subtitle",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        4.6
+      );
+
+      // Left and Right Pill Cards Slide In
+      tl.fromTo(
+        "#s2-left-card",
+        { opacity: 0, x: -80 },
+        { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" },
+        5.03 // beat-grid: 5.03s
+      );
+      tl.fromTo(
+        "#s2-right-card",
+        { opacity: 0, x: 80 },
+        { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" },
+        5.53 // beat-grid: 5.53s
+      );
+
+      // Center Shield locks in with sound impact (Beat Lock: 6.03s)
+      tl.fromTo(
+        "#s2-center-shield",
+        { opacity: 0, scale: 0.6, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "back.out(1.7)" },
+        6.03 // beat-locked: 6.03s
+      );
+
+      // Chronic Banner pops in
+      tl.fromTo(
+        "#s2-chronic-banner",
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+        7.02 // beat-grid: 7.02s
+      );
+
+      // Transition Out Scene 2
+      tl.to(
+        "#scene-2",
+        { opacity: 0, scale: 0.96, duration: 0.4, ease: "power2.in" },
+        8.6
+      );
+      tl.set("#scene-2", { display: "none" }, 9.0);
+
+      // ==========================================
+      // SCENE 3: (8.8s - 13.2s) - Chemist Box Verifier
+      // ==========================================
+      tl.set("#scene-3", { opacity: 1, pointerEvents: "auto" }, 8.8);
+      tl.fromTo(
+        "#s3-badge",
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        8.9
+      );
+      tl.fromTo(
+        "#s3-title",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+        9.02 // beat-grid: 9.02s
+      );
+      tl.fromTo(
+        "#s3-subtitle",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        9.3
+      );
+
+      // Comparison Cards
+      tl.fromTo(
+        "#s3-card-prescribed",
+        { opacity: 0, x: -60 },
+        { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" },
+        9.7
+      );
+      tl.fromTo(
+        "#s3-card-chemist",
+        { opacity: 0, x: 60 },
+        { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" },
+        10.1
+      );
+
+      // Center Match Badge (Beat Lock: 10.52s)
+      tl.fromTo(
+        "#s3-center-match",
+        { opacity: 0, scale: 0.3 },
+        { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" },
+        10.52 // beat-locked: 10.52s
+      );
+      tl.fromTo(
+        "#s3-verdict-banner",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        11.2
+      );
+
+      // Transition Out Scene 3
+      tl.to(
+        "#scene-3",
+        { opacity: 0, scale: 0.96, duration: 0.4, ease: "power2.in" },
+        13.0
+      );
+      tl.set("#scene-3", { display: "none" }, 13.4);
+
+      // ==========================================
+      // SCENE 4: (13.2s - 18.0s) - Caretaker & Grand Outro
+      // ==========================================
+      tl.set("#scene-4", { opacity: 1, pointerEvents: "auto" }, 13.2);
+
+      // Part A: Caretaker Schedule (13.2s - 15.2s)
+      tl.fromTo(
+        "#s4-caretaker-block",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+        13.3
+      );
+      tl.fromTo(
+        "#s4-caretaker-block .grid > div",
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.18, ease: "power3.out" },
+        13.6
+      );
+
+      // Fade out Caretaker Block to reveal Grand Hero
+      tl.to(
+        "#s4-caretaker-block",
+        { opacity: 0, scale: 0.95, duration: 0.35, ease: "power2.in" },
+        15.1
+      );
+      tl.set("#s4-caretaker-block", { display: "none" }, 15.45);
+
+      // Part B: Grand Hero Outro (Beat Lock: 15.52s)
+      tl.set("#s4-hero-outro", { pointerEvents: "auto" }, 15.3);
+      tl.to("#s4-hero-outro", { opacity: 1, duration: 0.3 }, 15.3);
+
+      tl.fromTo(
+        "#s4-logo",
+        { opacity: 0, scale: 0.4, rotate: -15 },
+        { opacity: 1, scale: 1, rotate: 0, duration: 0.7, ease: "back.out(1.8)" },
+        15.4
+      );
+      tl.fromTo(
+        "#s4-brand-name",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+        15.52 // strong-cue beat-locked: 15.52s
+      );
+      tl.fromTo(
+        "#s4-tagline",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        15.8
+      );
+      tl.fromTo(
+        "#s4-badges > div",
+        { opacity: 0, scale: 0.85, y: 15 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.4, stagger: 0.15, ease: "back.out(1.5)" },
+        16.02 // beat-grid: 16.02s
+      );
+      tl.fromTo(
+        "#s4-punchline",
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        16.6
+      );
+
+      // Register timeline for Hyperframes
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

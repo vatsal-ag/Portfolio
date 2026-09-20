@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+venv/
+.venv/
+env/
+frontend/node_modules/
+brag-output/composition/node_modules/
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# Frontend build artifacts
+frontend/dist/
+.vite/
+
+# Local agent artifacts & tooling
+.agents/
+
+# OS files & Local Environment
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.env
+.env.local

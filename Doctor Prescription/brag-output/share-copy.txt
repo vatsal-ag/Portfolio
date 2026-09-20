@@ -1,0 +1,5 @@
+Doctors write in hieroglyphics. Your stomach shouldn't pay the price.
+
+Introducing RxVision AI: an intelligent clinical platform that deciphers cursive doctor prescriptions in 0.3s, uncovers beneficial drug synergies (like antacids protecting against painkiller-induced acidity), verifies chemist generic boxes, and sets meal-aligned caretaker alarms for seniors.
+
+Built with end-to-end local encryption — 100% HIPAA & IT Act 2000 compliant.

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <rect width="800" height="1000" fill="#fafaf9"/>
+  <rect x="25" y="25" width="750" height="950" rx="12" fill="#ffffff" stroke="#d6d3d1" stroke-width="2"/>
+  
+  <!-- Header -->
+  <g transform="translate(60, 60)">
+    <rect x="0" y="0" width="60" height="60" rx="8" fill="#0d9488"/>
+    <path d="M 20 30 C 20 20 40 20 40 30 C 40 40 20 45 20 50" stroke="#ffffff" stroke-width="4" fill="none"/>
+    <text x="80" y="30" font-family="'Georgia', serif" font-size="24" font-weight="bold" fill="#115e59">METROPOLITAN CHEST &amp; ALLERGY CLINIC</text>
+    <text x="80" y="50" font-family="sans-serif" font-size="13" fill="#64748b">Pulmonology &amp; Respiratory Care • Tel: +1 (555) 438-9901</text>
+  </g>
+  
+  <line x1="50" y1="140" x2="750" y2="140" stroke="#0d9488" stroke-width="3"/>
+
+  <!-- Doctor & Patient -->
+  <g transform="translate(60, 165)" font-family="sans-serif">
+    <text x="0" y="15" font-size="14" font-weight="bold" fill="#1e293b">Dr. Elizabeth Chen, M.D. (Chest Specialist)</text>
+    <text x="0" y="35" font-size="12" fill="#475569">Reg. No: PULM-99120-NY</text>
+    <text x="450" y="15" font-size="13" fill="#334155">Date: <tspan font-weight="bold" fill="#0f172a">16 Sep 2026</tspan></text>
+  </g>
+
+  <!-- Patient Box -->
+  <rect x="50" y="220" width="700" height="50" rx="6" fill="#f0fdfa" stroke="#ccfbf1" stroke-width="1"/>
+  <g transform="translate(65, 252)" font-family="sans-serif" font-size="13" fill="#334155">
+    <text x="0" y="0">Patient Name: <tspan font-weight="bold" fill="#0f172a">Grandpa Arthur Vance</tspan></text>
+    <text x="320" y="0">Age: <tspan font-weight="bold">74 Yrs</tspan></text>
+    <text x="440" y="0">Sex: <tspan font-weight="bold">M</tspan></text>
+  </g>
+
+  <!-- Diagnosis -->
+  <g transform="translate(60, 310)" font-family="sans-serif">
+    <text x="0" y="0" font-size="14" font-weight="bold" fill="#0f766e">Diagnosis / Findings:</text>
+    <text x="180" y="0" font-size="14" font-weight="600" fill="#0f172a">Acute Bacterial Bronchitis with Productive Cough</text>
+  </g>
+
+  <g transform="translate(60, 350)">
+    <text x="0" y="35" font-family="'Times New Roman', serif" font-size="44" font-weight="bold" font-style="italic" fill="#0d9488">℞</text>
+  </g>
+
+  <g transform="translate(120, 380)" font-family="'Brush Script MT', 'Segoe Script', 'Comic Sans MS', cursive, sans-serif" fill="#134e4a">
+    <text x="0" y="40" font-size="26" font-weight="bold">1. Tab. Augmentin 625mg  -----------  1 Tab  B.D. (p.c.)</text>
+    <text x="30" y="70" font-family="sans-serif" font-size="13" fill="#475569">[Amoxicillin 500mg + Clavulanate 125mg] - 5 days after food</text>
+
+    <text x="0" y="140" font-size="26" font-weight="bold">2. Cap. Darolac Probiotic  -----------  1 Cap  B.D. (2h p.c.)</text>
+    <text x="30" y="170" font-family="sans-serif" font-size="13" fill="#475569">[Lactobacillus blend] - Take 2 hours after antibiotic to protect gut flora</text>
+
+    <text x="0" y="240" font-size="26" font-weight="bold">3. Tab. Montair LC  -----------------  1 Tab  O.D. (Bedtime)</text>
+    <text x="30" y="270" font-family="sans-serif" font-size="13" fill="#475569">[Montelukast + Levocetirizine] - 7 days at bedtime for cough</text>
+  </g>
+
+  <rect x="60" y="690" width="680" height="80" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <g transform="translate(80, 720)" font-family="sans-serif">
+    <text x="0" y="0" font-size="13" font-weight="bold" fill="#15803d">SAFETY &amp; CARE ADVICE:</text>
+    <text x="0" y="22" font-size="13" fill="#0f172a">• Probiotic capsule given to counteract antibiotic-induced gut flora depletion.</text>
+    <text x="0" y="42" font-size="13" fill="#0f172a">• Inhale steam twice daily. Avoid cold beverages.</text>
+  </g>
+
+  <g transform="translate(520, 850)">
+    <path d="M 10 25 Q 40 40 80 15 T 150 30" fill="none" stroke="#0f766e" stroke-width="2.5"/>
+    <line x1="0" y1="50" x2="200" y2="50" stroke="#94a3b8" stroke-width="1"/>
+    <text x="20" y="70" font-family="sans-serif" font-size="12" font-weight="bold" fill="#334155">Dr. Elizabeth Chen, M.D.</text>
+  </g>
+
+  <rect x="50" y="935" width="700" height="35" rx="4" fill="#f1f5f9"/>
+  <text x="70" y="957" font-family="sans-serif" font-size="10" fill="#64748b">CONFIDENTIAL HEALTHCARE RECORD • PROTECTED UNDER HIPAA PRIVACY RULE 45 CFR &amp; IT ACT 2000 (SEC 43A / 72A)</text>
+</svg>

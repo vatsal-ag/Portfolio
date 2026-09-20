@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <rect width="800" height="1000" fill="#fcfbf7"/>
+  <rect x="25" y="25" width="750" height="950" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  
+  <!-- Clinic Header -->
+  <g transform="translate(60, 60)">
+    <rect x="0" y="0" width="60" height="60" rx="8" fill="#2563eb"/>
+    <path d="M 30 15 L 30 45 M 15 30 L 45 30" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+    <text x="80" y="30" font-family="'Georgia', serif" font-size="24" font-weight="bold" fill="#0f172a">ST. JUDE ORTHOPEDIC &amp; JOINT CLINIC</text>
+    <text x="80" y="50" font-family="sans-serif" font-size="13" fill="#64748b">104 Healthcare Blvd, Medical District • Tel: +1 (555) 019-2834</text>
+  </g>
+  
+  <line x1="50" y1="140" x2="750" y2="140" stroke="#0284c7" stroke-width="3"/>
+
+  <!-- Doctor & Patient Details -->
+  <g transform="translate(60, 165)" font-family="sans-serif">
+    <text x="0" y="15" font-size="14" font-weight="bold" fill="#1e293b">Dr. Robert Miller, M.D. (Ortho)</text>
+    <text x="0" y="35" font-size="12" fill="#475569">Reg. No: MED-78491-NY</text>
+    
+    <text x="450" y="15" font-size="13" fill="#334155">Date: <tspan font-weight="bold" fill="#0f172a">15 Sep 2026</tspan></text>
+    <text x="450" y="35" font-size="13" fill="#334155">Prescription ID: <tspan font-weight="bold" fill="#0f172a">RX-84920</tspan></text>
+  </g>
+
+  <!-- Patient Box -->
+  <rect x="50" y="220" width="700" height="50" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <g transform="translate(65, 252)" font-family="sans-serif" font-size="13" fill="#334155">
+    <text x="0" y="0">Patient Name: <tspan font-weight="bold" fill="#0f172a">Grandpa Arthur Vance</tspan></text>
+    <text x="320" y="0">Age: <tspan font-weight="bold">74 Yrs</tspan></text>
+    <text x="440" y="0">Sex: <tspan font-weight="bold">M</tspan></text>
+    <text x="530" y="0">Weight: <tspan font-weight="bold">68 Kg</tspan></text>
+  </g>
+
+  <!-- Diagnosis -->
+  <g transform="translate(60, 310)" font-family="sans-serif">
+    <text x="0" y="0" font-size="14" font-weight="bold" fill="#0369a1">Diagnosis / Clinical Impression:</text>
+    <text x="240" y="0" font-size="14" font-weight="600" fill="#0f172a">Acute Knee Osteoarthritis with Synovial Inflammation</text>
+  </g>
+
+  <!-- Rx Symbol -->
+  <g transform="translate(60, 350)">
+    <text x="0" y="35" font-family="'Times New Roman', serif" font-size="44" font-weight="bold" font-style="italic" fill="#0284c7">℞</text>
+  </g>
+
+  <!-- Handwritten Script Effect for Medications -->
+  <g transform="translate(120, 380)" font-family="'Brush Script MT', 'Segoe Script', 'Comic Sans MS', cursive, sans-serif" fill="#1e3a8a">
+    <!-- Medicine 1: Combiflam -->
+    <text x="0" y="40" font-size="26" font-weight="bold">1. Tab. Combiflam (400mg)  ------------  1 Tab  B.D. (p.c.)</text>
+    <text x="30" y="70" font-family="sans-serif" font-size="13" fill="#475569">[Ibuprofen 400mg + Paracetamol 325mg] - 5 days after food</text>
+
+    <!-- Medicine 2: Pantocid 40 -->
+    <text x="0" y="140" font-size="26" font-weight="bold">2. Cap. Pantocid 40mg  ---------------  1 Cap  O.D. (a.c.)</text>
+    <text x="30" y="170" font-family="sans-serif" font-size="13" fill="#475569">[Pantoprazole 40mg] - Empty stomach 30 mins before breakfast</text>
+
+    <!-- Medicine 3: Shelcal 500 -->
+    <text x="0" y="240" font-size="26" font-weight="bold">3. Tab. Shelcal 500  ------------------  1 Tab  O.D. (Night)</text>
+    <text x="30" y="270" font-family="sans-serif" font-size="13" fill="#475569">[Calcium 500mg + Vit D3] - 15 days at bedtime after dinner</text>
+  </g>
+
+  <!-- Special Clinical Note on Synergy -->
+  <rect x="60" y="690" width="680" height="90" rx="8" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5"/>
+  <g transform="translate(80, 720)" font-family="sans-serif">
+    <text x="0" y="0" font-size="13" font-weight="bold" fill="#0369a1">DOCTOR'S DIRECTIVE &amp; SAFETY NOTE:</text>
+    <text x="0" y="22" font-size="13" fill="#0f172a">• Pantocid 40 is mandatory to prevent gastritis from NSAID painkiller.</text>
+    <text x="0" y="42" font-size="13" fill="#0f172a">• Hot water compression on left knee joint twice daily for 15 minutes. Avoid squatting.</text>
+  </g>
+
+  <!-- Doctor Signature -->
+  <g transform="translate(520, 850)">
+    <path d="M 10 30 Q 50 5 80 40 T 140 20 T 190 35" fill="none" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="0" y1="50" x2="200" y2="50" stroke="#94a3b8" stroke-width="1"/>
+    <text x="20" y="70" font-family="sans-serif" font-size="12" font-weight="bold" fill="#334155">Dr. Robert Miller, M.D.</text>
+    <text x="35" y="86" font-family="sans-serif" font-size="11" fill="#64748b">Senior Orthopedic Surgeon</text>
+  </g>
+
+  <!-- HIPAA & IT Act Security Notice at bottom -->
+  <rect x="50" y="935" width="700" height="35" rx="4" fill="#f1f5f9"/>
+  <text x="70" y="957" font-family="sans-serif" font-size="10" fill="#64748b">CONFIDENTIAL HEALTHCARE RECORD • PROTECTED UNDER HIPAA PRIVACY RULE 45 CFR &amp; IT ACT 2000 (SEC 43A / 72A)</text>
+</svg>
