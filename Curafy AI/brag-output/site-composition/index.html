@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Curafy AI — Full Site Experience &amp; UI Tour Video</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0f172a;
+        font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+        color: #1e293b;
+      }
+      .font-display {
+        font-family: "Outfit", sans-serif;
+      }
+      .font-mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* Mock Browser Shell Styling */
+      .browser-window {
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 30px 90px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.15);
+        overflow: hidden;
+      }
+      .browser-chrome {
+        background: #f1f5f9;
+        border-bottom: 1px solid #e2e8f0;
+      }
+    </style>
+
+    <script>
+      window.__tailwindReady = new Promise(function (resolve) {
+        var loaded = document.readyState === "complete";
+        var resolved = false;
+        var observer;
+        function readTailwindCss() {
+          var styles = document.querySelectorAll("style");
+          for (var i = styles.length - 1; i >= 0; i--) {
+            var text = styles[i].textContent || "";
+            if (text.indexOf("tailwindcss v") !== -1) return text;
+          }
+          return "";
+        }
+        function finish() {
+          if (resolved || !loaded || !readTailwindCss()) return;
+          resolved = true;
+          if (observer) observer.disconnect();
+          resolve(true);
+        }
+        observer = new MutationObserver(finish);
+        observer.observe(document.documentElement, {
+          childList: true,
+          subtree: true,
+          characterData: true,
+        });
+        if (loaded) {
+          finish();
+        } else {
+          window.addEventListener(
+            "load",
+            function () {
+              loaded = true;
+              finish();
+            },
+            { once: true }
+          );
+        }
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.2.4/dist/index.global.js"
+      integrity="sha384-v5YF9xS+gLRWdvrQ0u/WRbCkjSIH0NjHIPe8tBL1ZRrmI7PiSH6LLdzs0aAIMCuh"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="72"
+      data-width="1920"
+      data-height="1080"
+      class="relative w-[1920px] height-[1080px] h-[1080px] overflow-hidden bg-[#070a11] select-none p-10 flex flex-col justify-center items-center"
+    >
+      <!-- Audio Elements -->
+      <audio
+        id="bg-music"
+        data-start="0"
+        data-duration="72"
+        data-track-index="1"
+        data-volume="0.32"
+        src="assets/music/track.mp3"
+      ></audio>
+      <audio id="sfx-1" data-start="4.0" data-duration="0.10" data-track-index="2" data-volume="0.6" src="assets/sfx/interface/click_001.ogg"></audio>
+      <audio id="sfx-2" data-start="14.0" data-duration="0.10" data-track-index="3" data-volume="0.6" src="assets/sfx/interface/click_001.ogg"></audio>
+      <audio id="sfx-3" data-start="24.0" data-duration="0.18" data-track-index="4" data-volume="0.7" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
+      <audio id="sfx-4" data-start="34.0" data-duration="0.10" data-track-index="5" data-volume="0.6" src="assets/sfx/interface/click_001.ogg"></audio>
+      <audio id="sfx-5" data-start="44.0" data-duration="0.18" data-track-index="6" data-volume="0.7" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
+      <audio id="sfx-6" data-start="54.0" data-duration="0.11" data-track-index="7" data-volume="0.6" src="assets/sfx/interface/drop_001.ogg"></audio>
+      <audio id="sfx-7" data-start="66.0" data-duration="1.48" data-track-index="8" data-volume="0.85" src="assets/sfx/impact/impactBell_heavy_000.ogg"></audio>
+
+      <!-- App Stage Container -->
+      <div id="browser-container" class="browser-window w-[1720px] h-[980px] flex flex-col relative z-10">
+        <!-- Mock Browser Top Chrome -->
+        <div class="browser-chrome px-6 py-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-3.5 h-3.5 rounded-full bg-rose-400"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-amber-400"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-emerald-400"></span>
+          </div>
+
+          <div class="flex items-center gap-3 bg-white px-6 py-1.5 rounded-xl border border-slate-200 text-xs text-slate-500 font-mono w-[650px] justify-center">
+            <span class="text-teal-600 font-bold">https://</span>
+            <span class="text-slate-800 font-bold">curafy.ai</span>
+            <span class="text-slate-400">/app/clinical-vault</span>
+          </div>
+
+          <div class="flex items-center gap-2 text-xs font-bold text-slate-600">
+            <span class="px-2.5 py-1 rounded-md bg-teal-100 text-teal-800">HIPAA Protected</span>
+          </div>
+        </div>
+
+        <!-- Application Top Navigation Bar -->
+        <header class="bg-white border-b border-slate-200 px-8 py-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-600 to-sky-600 text-white flex items-center justify-center font-bold text-xl font-serif shadow-sm">
+              ℞
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-display font-black text-xl text-slate-900">Curafy<span class="text-teal-600"> AI</span></span>
+                <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-teal-50 text-teal-700 border border-teal-200">Clinical Suite</span>
+              </div>
+              <p class="text-[11px] text-slate-500 font-medium">Compassionate Prescription &amp; Health Intelligence</p>
+            </div>
+          </div>
+
+          <!-- Nav Tabs -->
+          <div class="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl border border-slate-200 text-xs font-bold">
+            <button id="nav-scan" class="px-4 py-2 rounded-xl bg-white text-teal-800 shadow-xs">Scan Rx</button>
+            <button id="nav-reports" class="px-4 py-2 rounded-xl text-slate-600">Lab Reports &amp; Tests</button>
+            <button id="nav-diet" class="px-4 py-2 rounded-xl text-slate-600">Personalized Diet</button>
+            <button id="nav-history" class="px-4 py-2 rounded-xl text-slate-600">Medical Vault</button>
+            <button id="nav-caretaker" class="px-4 py-2 rounded-xl text-slate-600">Caretaker Alarms</button>
+            <button id="nav-compliance" class="px-4 py-2 rounded-xl text-slate-600">HIPAA Center</button>
+          </div>
+
+          <div class="flex items-center gap-3 text-xs">
+            <div class="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 font-semibold">
+              Senior Mode: <strong class="text-slate-900">ON</strong>
+            </div>
+            <div class="px-3 py-1.5 rounded-xl bg-teal-50 border border-teal-200 text-teal-800 font-bold">
+              Patient: Arthur Vance (74y)
+            </div>
+          </div>
+        </header>
+
+        <!-- Viewport Canvas Area -->
+        <main class="flex-1 bg-slate-50 p-8 overflow-hidden relative">
+
+          <!-- ========================================================= -->
+          <!-- SCREEN 1: Prescription Scanner & Dropzone (0.0s - 10.0s) -->
+          <!-- ========================================================= -->
+          <div id="screen-1" class="absolute inset-8 flex flex-col justify-between">
+            <div class="text-center space-y-1">
+              <span class="text-xs uppercase font-extrabold px-3 py-1 rounded-full bg-teal-100 text-teal-800 inline-block mb-1">
+                SCREEN 1: PRESCRIPTION SCANNER
+              </span>
+              <h2 class="text-3xl font-black text-slate-900 font-display">
+                Drop Doctor Prescription or Select Realistic Clinical Demo
+              </h2>
+              <p class="text-xs text-slate-500 font-medium">
+                Supports handwriting photos, scanned doctor slips, and multi-page records.
+              </p>
+            </div>
+
+            <!-- Upload Dropzone Box -->
+            <div class="bg-white rounded-3xl p-8 border-2 border-dashed border-teal-300 flex flex-col items-center justify-center text-center space-y-3 shadow-xs">
+              <div class="w-16 h-16 rounded-2xl bg-teal-50 border border-teal-200 text-teal-600 flex items-center justify-center text-3xl font-bold">
+                ↑
+              </div>
+              <div class="space-y-0.5">
+                <p class="text-base font-bold text-slate-800">Drag and drop doctor prescription image</p>
+                <p class="text-xs text-slate-400">JPG, PNG, WEBP, or scanned PDF supported</p>
+              </div>
+              <button class="px-6 py-2.5 rounded-xl bg-teal-600 text-white font-bold text-xs shadow-md">
+                Browse Files / Take Camera Photo
+              </button>
+            </div>
+
+            <!-- 1-Click Demo Prescriptions -->
+            <div class="space-y-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">1-Click Clinical Demos:</span>
+              <div class="grid grid-cols-4 gap-3 text-xs">
+                <div class="bg-white p-3.5 rounded-2xl border-2 border-teal-500 shadow-xs">
+                  <span class="font-bold text-slate-900 block">Knee Joint Arthritis</span>
+                  <p class="text-slate-500 text-[11px]">Combiflam + Pantocid 40 Synergy</p>
+                </div>
+                <div class="bg-white p-3.5 rounded-2xl border border-slate-200">
+                  <span class="font-bold text-slate-900 block">Acute Bronchitis</span>
+                  <p class="text-slate-500 text-[11px]">Augmentin + Darolac Probiotic</p>
+                </div>
+                <div class="bg-white p-3.5 rounded-2xl border border-slate-200">
+                  <span class="font-bold text-slate-900 block">Lumbar Radiculopathy</span>
+                  <p class="text-slate-500 text-[11px]">Controlled Opioid &amp; Lighter Options</p>
+                </div>
+                <div class="bg-white p-3.5 rounded-2xl border border-slate-200">
+                  <span class="font-bold text-slate-900 block">Oncology Care Protocol</span>
+                  <p class="text-slate-500 text-[11px]">Compassionate Nominee Shield</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ========================================================= -->
+          <!-- SCREEN 2: Decoded Prescription & Synergy (10.0s - 20.0s) -->
+          <!-- ========================================================= -->
+          <div id="screen-2" class="absolute inset-8 flex flex-col justify-between opacity-0 pointer-events-none">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+              <div>
+                <span class="text-xs uppercase font-extrabold text-teal-700 block">SCREEN 2: DIGITIZED CLINICAL RECORD</span>
+                <h2 class="text-2xl font-black text-slate-900 font-display">Prescription #RX-101: Acute Knee Joint Arthritis</h2>
+                <p class="text-xs text-slate-500 font-medium">Prescribed by Dr. S. Sharma, MD • Apollo Joint Institute • Dated: 18 Sep 2026</p>
+              </div>
+              <div class="flex gap-2">
+                <button class="px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 text-xs font-bold">Original Slip</button>
+                <button class="px-4 py-2 rounded-xl bg-teal-600 text-white text-xs font-bold">Set Alarms</button>
+              </div>
+            </div>
+
+            <!-- Synergy Banner -->
+            <div class="p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-300 flex items-start gap-3">
+              <span class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold text-sm flex items-center justify-center shrink-0">✓</span>
+              <div>
+                <h4 class="text-sm font-bold text-emerald-950">Protective Synergy Detected: Combiflam + Pantocid 40</h4>
+                <p class="text-xs text-emerald-900 mt-0.5">
+                  Combiflam painkiller irritates the stomach lining. Pantocid antacid suppresses stomach acid, preventing mucosal erosion.
+                </p>
+              </div>
+            </div>
+
+            <!-- Decoded Medicines -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-2">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3 class="text-lg font-black text-slate-900">Combiflam 400mg</h3>
+                    <p class="text-xs text-slate-500">Ibuprofen + Paracetamol (NSAID)</p>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-teal-50 text-teal-800 text-xs font-bold">Twice Daily PC</span>
+                </div>
+                <p class="text-xs text-slate-700 font-medium">Relieves joint inflammation and acute swelling. Strictly take after meals.</p>
+              </div>
+
+              <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-2">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3 class="text-lg font-black text-slate-900">Pantocid 40mg</h3>
+                    <p class="text-xs text-slate-500">Pantoprazole (Proton Pump Inhibitor)</p>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-teal-50 text-teal-800 text-xs font-bold">Once Daily AC</span>
+                </div>
+                <p class="text-xs text-slate-700 font-medium">Protects gastric mucosa against painkiller irritation. Take 30 mins before breakfast.</p>
+              </div>
+            </div>
+
+            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 font-semibold">
+              Safety Check: Patient has chronic Acid Reflux (GERD). Painkiller must strictly follow meals.
+            </div>
+          </div>
+
+          <!-- ========================================================= -->
+          <!-- SCREEN 3: PubMed Proof & Lighter Alternatives (20.0s - 30.0s) -->
+          <!-- ========================================================= -->
+          <div id="screen-3" class="absolute inset-8 flex flex-col justify-between opacity-0 pointer-events-none">
+            <div class="pb-3 border-b border-slate-200">
+              <span class="text-xs uppercase font-extrabold text-indigo-700 block">SCREEN 3: MEDICAL EVIDENCE &amp; CONTROLLED DRUGS</span>
+              <h2 class="text-2xl font-black text-slate-900 font-display">Peer-Reviewed Proof &amp; Safer Step-Down Alternatives</h2>
+              <p class="text-xs text-slate-500 font-medium">Verified against National Library of Medicine (PubMed) and clinical Cochrane reviews.</p>
+            </div>
+
+            <!-- Controlled Drug Warning -->
+            <div class="p-4 rounded-2xl bg-amber-50 border-2 border-amber-300 space-y-2">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold uppercase text-amber-900">Controlled Substance Warning: Tramadol 50mg</span>
+                <span class="text-[11px] font-black px-2 py-0.5 rounded bg-amber-200 text-amber-950">High Potency Alert</span>
+              </div>
+              <p class="text-xs text-amber-950 leading-relaxed">
+                Opioid analgesic carrying cognitive sedation, dependency risk, and constipation in senior patients.
+              </p>
+              <div class="p-3 bg-white rounded-xl border border-amber-200 text-xs space-y-1">
+                <span class="font-bold text-teal-800 block">Suggested Lighter Step-Down to Discuss with Doctor:</span>
+                <p class="text-slate-700">Paracetamol 650mg + Topical Diclofenac Gel. Eliminates central opioid side effects.</p>
+              </div>
+            </div>
+
+            <!-- Medical Proof Drawer Expanded -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                <span class="text-xs font-bold text-slate-800">PubMed Evidence &amp; Clinical Trials for Pantoprazole + NSAID</span>
+                <span class="text-xs font-bold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">Grade A Systematic Review</span>
+              </div>
+              <div class="space-y-1.5 text-xs text-slate-700">
+                <p class="font-bold text-slate-900">The Cochrane Database of Systematic Reviews (2023)</p>
+                <p class="text-slate-600">"Co-therapy of Proton Pump Inhibitors with NSAIDs prevents 68% of endoscopic ulcers and gastric perforations in high-risk patients."</p>
+                <p class="text-teal-700 font-mono text-[11px] font-bold">PubMed PMID: 31287654 - Direct NCBI Indexed Citation</p>
+              </div>
+            </div>
+
+            <div class="p-3 bg-slate-100 rounded-xl text-xs text-slate-500">
+              All clinical evidence drawn from peer-reviewed, double-blind randomized trials.
+            </div>
+          </div>
+
+          <!-- ========================================================= -->
+          <!-- SCREEN 4: Diagnostic Lab Reports (30.0s - 40.0s) -->
+          <!-- ========================================================= -->
+          <div id="screen-4" class="absolute inset-8 flex flex-col justify-between opacity-0 pointer-events-none">
+            <div class="pb-3 border-b border-slate-200">
+              <span class="text-xs uppercase font-extrabold text-sky-700 block">SCREEN 4: DIAGNOSTIC LAB REPORTS TAB</span>
+              <h2 class="text-2xl font-black text-slate-900 font-display">Pathology &amp; Metabolic Blood Test Correlation</h2>
+              <p class="text-xs text-slate-500 font-medium">Uploaded from Apollo Diagnostics Reference Lab • Specimen Date: 18 Sep 2026</p>
+            </div>
+
+            <!-- Clinical Prescription Correlation Alert -->
+            <div class="p-4 rounded-2xl bg-amber-50 border-2 border-amber-300 space-y-1">
+              <span class="text-xs font-bold uppercase text-amber-900 block">Clinical Drug Correlation Alert</span>
+              <p class="text-xs font-semibold text-amber-950 leading-relaxed">
+                Elevated Serum Creatinine indicates mild renal strain: caution advised with prescribed NSAIDs (Combiflam). Maintain 2.5L daily hydration.
+              </p>
+            </div>
+
+            <!-- Parameters Table -->
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase text-[10px]">
+                  <tr>
+                    <th class="p-3">Test Parameter</th>
+                    <th class="p-3">Observed Value</th>
+                    <th class="p-3">Reference Standard</th>
+                    <th class="p-3">Clinical Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-xs">
+                  <tr>
+                    <td class="p-3 font-bold text-slate-800">Hemoglobin (Hb)</td>
+                    <td class="p-3 font-bold text-slate-900">13.8 g/dL</td>
+                    <td class="p-3 text-slate-500 font-mono">13.0 - 17.0</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">NORMAL</span></td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold text-slate-800">Serum Creatinine</td>
+                    <td class="p-3 font-black text-amber-900">1.38 mg/dL</td>
+                    <td class="p-3 text-slate-500 font-mono">0.7 - 1.2</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-bold">HIGH (Mild Strain)</span></td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold text-slate-800">Fasting Blood Sugar</td>
+                    <td class="p-3 font-black text-amber-900">134 mg/dL</td>
+                    <td class="p-3 text-slate-500 font-mono">70 - 100</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-bold">HIGH (Diabetic Flag)</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="p-3 bg-emerald-50 rounded-xl text-xs text-emerald-800 font-semibold">
+              Telemetry stored on local encrypted health vault under HIPAA Technical Safeguards.
+            </div>
+          </div>
+
+          <!-- ========================================================= -->
+          <!-- SCREEN 5: Compassionate Care & Nominee Unlock (40.0s - 50.0s) -->
+          <!-- ========================================================= -->
+          <div id="screen-5" class="absolute inset-8 flex flex-col justify-between opacity-0 pointer-events-none">
+            <div class="pb-3 border-b border-slate-200">
+              <span class="text-xs uppercase font-extrabold text-purple-700 block">SCREEN 5: COMPASSIONATE CARE SHIELD</span>
+              <h2 class="text-2xl font-black text-slate-900 font-display">Gentle Clinical Disclosure &amp; Nominee Support Shield</h2>
+              <p class="text-xs text-slate-500 font-medium">Protecting emotionally vulnerable patients from blunt terminal diagnosis shock.</p>
+            </div>
+
+            <!-- Shield Modal / Card -->
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 p-6 rounded-3xl text-white space-y-4 shadow-xl border border-indigo-700/40">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 border border-indigo-400/40 text-indigo-300 flex items-center justify-center font-bold text-2xl shrink-0">
+                  🔒
+                </div>
+                <div class="space-y-1">
+                  <span class="text-xs uppercase font-bold px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300">Compassionate Protocol Active</span>
+                  <h3 class="text-xl font-bold font-display">Caregiver / Nominee Review Required First</h3>
+                  <p class="text-xs text-slate-300 leading-relaxed max-w-3xl">
+                    Diagnosing oncologist has noted a sensitive diagnosis. To ensure proper family support, the primary designated nominee (Sarah Vance) is briefed first using a secure caregiver PIN.
+                  </p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4 pt-2">
+                <div class="bg-white/10 p-4 rounded-2xl border border-white/10 space-y-2">
+                  <span class="text-xs font-bold text-white block">Nominee Security PIN Access:</span>
+                  <div class="flex gap-2">
+                    <input type="password" value="1234" readonly class="flex-1 p-2 rounded-xl bg-slate-900 border border-white/20 text-white font-mono text-center text-sm" />
+                    <button class="px-4 py-2 rounded-xl bg-teal-500 text-slate-950 font-bold text-xs">Unlock Record</button>
+                  </div>
+                </div>
+
+                <div class="bg-white/10 p-4 rounded-2xl border border-white/10 space-y-2">
+                  <span class="text-xs font-bold text-white block">Patient Direct Gentle Disclosure:</span>
+                  <button class="w-full py-2 px-3 rounded-xl bg-white/20 text-white font-bold text-xs border border-white/20">
+                    Patient Ready - View Gentle Reassuring Care Plan
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-3 bg-slate-100 rounded-xl text-xs text-slate-600">
+              Nominee contact details and PIN settings can be configured inside the Patient Profile modal.
+            </div>
+          </div>
+
+          <!-- ========================================================= -->
+          <!-- SCREEN 6: Personalized Diet Tab (50.0s - 60.0s) -->
+          <!-- ========================================================= -->
+          <div id="screen-6" class="absolute inset-8 flex flex-col justify-between opacity-0 pointer-events-none">
+            <div class="pb-3 border-b border-slate-200">
+              <span class="text-xs uppercase font-extrabold text-emerald-700 block">SCREEN 6: PERSONALIZED CLINICAL DIET</span>
+              <h2 class="text-2xl font-black text-slate-900 font-display">Condition-Specific Diet &amp; Medication Schedule</h2>
+              <p class="text-xs text-slate-500 font-medium">Customized for Type 2 Diabetes, Acid Reflux, and active anti-inflammatory prescriptions.</p>
+            </div>
+
+            <!-- Meal Timeline -->
+            <div class="grid grid-cols-3 gap-4">
+              <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-1.5">
+                <span class="text-[11px] font-bold text-teal-700 block uppercase">Breakfast: 08:30 AM</span>
+                <h4 class="font-bold text-slate-900 text-sm">Warm Rolled Oats &amp; Chia Seeds</h4>
+                <p class="text-xs text-slate-600">Buffers stomach lining against acid surges.</p>
+                <span class="text-[10px] font-semibold text-teal-800 bg-teal-50 px-2 py-0.5 rounded block">Take Pantocid 30m before</span>
+              </div>
+
+              <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-1.5">
+                <span class="text-[11px] font-bold text-indigo-700 block uppercase">Lunch: 01:00 PM</span>
+                <h4 class="font-bold text-slate-900 text-sm">Steamed Lentils &amp; Probiotic Curd</h4>
+                <p class="text-xs text-slate-600">Restores gut flora and supports metabolic stability.</p>
+                <span class="text-[10px] font-semibold text-indigo-800 bg-indigo-50 px-2 py-0.5 rounded block">Take Metformin with lunch</span>
+              </div>
+
+              <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-1.5">
+                <span class="text-[11px] font-bold text-purple-700 block uppercase">Dinner: 07:30 PM</span>
+                <h4 class="font-bold text-slate-900 text-sm">Light Vegetable Stew &amp; Khichdi</h4>
+                <p class="text-xs text-slate-600">Early dinner prevents nocturnal acid reflux.</p>
+                <span class="text-[10px] font-semibold text-purple-800 bg-purple-50 px-2 py-0.5 rounded block">Finish 2.5h before bed</span>
+              </div>
+            </div>
+
+            <!-- Healing vs Avoid Foods -->
+            <div class="grid grid-cols-2 gap-4 text-xs">
+              <div class="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-200 space-y-1">
+                <span class="font-bold text-emerald-950 block">Super Healing Foods:</span>
+                <p class="text-emerald-900">Turmeric golden broth, probiotic curd, steamed alkaline vegetables, and soluble fiber.</p>
+              </div>
+              <div class="p-3.5 bg-rose-50 rounded-2xl border border-rose-200 space-y-1">
+                <span class="font-bold text-rose-950 block">Foods to Strictly Avoid:</span>
+                <p class="text-rose-900">Deep-fried oily snacks, strong caffeinated coffee, empty-stomach citrus, and excess salt.</p>
+              </div>
+            </div>
+
+            <div class="p-3 bg-sky-50 rounded-xl text-xs text-sky-900 font-semibold">
+              Daily Target Hydration: 2.5 Liters of lukewarm water to assist kidney clearance.
+            </div>
+          </div>
+
+          <!-- ========================================================= -->
+          <!-- SCREEN 7: Caretaker Alarms, Box Check & HIPAA (60.0s - 72.0s) -->
+          <!-- ========================================================= -->
+          <div id="screen-7" class="absolute inset-8 flex flex-col justify-between opacity-0 pointer-events-none">
+            <div class="pb-3 border-b border-slate-200">
+              <span class="text-xs uppercase font-extrabold text-teal-700 block">SCREEN 7: COMPLETE HEALTH ASSISTANT</span>
+              <h2 class="text-2xl font-black text-slate-900 font-display">Caretaker Alarms, Chemist Box Verifier &amp; Privacy Center</h2>
+              <p class="text-xs text-slate-500 font-medium">Smart routine scheduler with Web Audio chimes and 100% HIPAA compliant local storage.</p>
+            </div>
+
+            <!-- Caretaker Grid -->
+            <div class="grid grid-cols-3 gap-4">
+              <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-2">
+                <span class="text-xs font-bold uppercase text-slate-500 block">Meal-Aligned Alarms</span>
+                <h4 class="font-bold text-slate-900 text-sm">08:00 AM • Pantocid 40</h4>
+                <p class="text-xs text-slate-600">30 minutes before breakfast. Soft chime alert for seniors.</p>
+                <button class="w-full py-1.5 rounded-lg bg-teal-600 text-white font-bold text-xs">Simulate Alarm</button>
+              </div>
+
+              <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-2">
+                <span class="text-xs font-bold uppercase text-slate-500 block">Box Photo Verifier</span>
+                <h4 class="font-bold text-slate-900 text-sm">Pan 40 vs Pantocid 40</h4>
+                <p class="text-xs text-emerald-700 font-bold">100% Safe Generic Substitute</p>
+                <button class="w-full py-1.5 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs">Verify Packaging</button>
+              </div>
+
+              <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-2">
+                <span class="text-xs font-bold uppercase text-slate-500 block">HIPAA Privacy Center</span>
+                <h4 class="font-bold text-slate-900 text-sm">Local Encrypted Vault</h4>
+                <p class="text-xs text-slate-600">Immutable audit logs &amp; 1-click EHR JSON export.</p>
+                <button class="w-full py-1.5 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs">Export Health Record</button>
+              </div>
+            </div>
+
+            <!-- Outro Banner -->
+            <div class="p-4 rounded-2xl bg-gradient-to-r from-teal-800 to-sky-900 text-white flex items-center justify-between">
+              <div>
+                <h3 class="font-bold text-base font-display">Curafy AI — Compassionate Prescription &amp; Health Intelligence</h3>
+                <p class="text-xs text-teal-200">Live platform available locally on your system at http://localhost:3000</p>
+              </div>
+              <span class="px-4 py-2 rounded-xl bg-white text-slate-900 font-bold text-xs">Explore the Platform</span>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </div>
+
+    <!-- GSAP Master Animation Engine (72.0s Duration) -->
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Tab switcher helper
+      function switchTab(activeId) {
+        ["nav-scan", "nav-reports", "nav-diet", "nav-history", "nav-caretaker", "nav-compliance"].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            if (id === activeId) {
+              el.className = "px-4 py-2 rounded-xl bg-white text-teal-800 shadow-xs font-bold";
+            } else {
+              el.className = "px-4 py-2 rounded-xl text-slate-600 font-medium";
+            }
+          }
+        });
+      }
+
+      // ==========================================
+      // SCREEN 1: (0.0s - 10.0s) Prescription Scanner
+      // ==========================================
+      tl.set("#screen-1", { opacity: 1 }, 0);
+      tl.fromTo("#screen-1", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.2);
+
+      tl.to("#screen-1", { opacity: 0, duration: 0.4, ease: "power2.in" }, 9.6);
+      tl.set("#screen-1", { display: "none" }, 10.0);
+
+      // ==========================================
+      // SCREEN 2: (10.0s - 20.0s) Decoded Rx & Synergy
+      // ==========================================
+      tl.set("#screen-2", { opacity: 1, pointerEvents: "auto" }, 10.0);
+      tl.fromTo("#screen-2", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 10.1);
+
+      tl.to("#screen-2", { opacity: 0, duration: 0.4, ease: "power2.in" }, 19.6);
+      tl.set("#screen-2", { display: "none" }, 20.0);
+
+      // ==========================================
+      // SCREEN 3: (20.0s - 30.0s) Medical Evidence & Proof
+      // ==========================================
+      tl.set("#screen-3", { opacity: 1, pointerEvents: "auto" }, 20.0);
+      tl.fromTo("#screen-3", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 20.1);
+
+      tl.to("#screen-3", { opacity: 0, duration: 0.4, ease: "power2.in" }, 29.6);
+      tl.set("#screen-3", { display: "none" }, 30.0);
+
+      // ==========================================
+      // SCREEN 4: (30.0s - 40.0s) Lab Reports Tab
+      // ==========================================
+      tl.call(() => switchTab("nav-reports"), null, 30.0);
+      tl.set("#screen-4", { opacity: 1, pointerEvents: "auto" }, 30.0);
+      tl.fromTo("#screen-4", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 30.1);
+
+      tl.to("#screen-4", { opacity: 0, duration: 0.4, ease: "power2.in" }, 39.6);
+      tl.set("#screen-4", { display: "none" }, 40.0);
+
+      // ==========================================
+      // SCREEN 5: (40.0s - 50.0s) Compassionate Nominee Shield
+      // ==========================================
+      tl.set("#screen-5", { opacity: 1, pointerEvents: "auto" }, 40.0);
+      tl.fromTo("#screen-5", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 40.1);
+
+      tl.to("#screen-5", { opacity: 0, duration: 0.4, ease: "power2.in" }, 49.6);
+      tl.set("#screen-5", { display: "none" }, 50.0);
+
+      // ==========================================
+      // SCREEN 6: (50.0s - 60.0s) Personalized Diet Tab
+      // ==========================================
+      tl.call(() => switchTab("nav-diet"), null, 50.0);
+      tl.set("#screen-6", { opacity: 1, pointerEvents: "auto" }, 50.0);
+      tl.fromTo("#screen-6", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 50.1);
+
+      tl.to("#screen-6", { opacity: 0, duration: 0.4, ease: "power2.in" }, 59.6);
+      tl.set("#screen-6", { display: "none" }, 60.0);
+
+      // ==========================================
+      // SCREEN 7: (60.0s - 72.0s) Caretaker Alarms & Outro
+      // ==========================================
+      tl.call(() => switchTab("nav-caretaker"), null, 60.0);
+      tl.set("#screen-7", { opacity: 1, pointerEvents: "auto" }, 60.0);
+      tl.fromTo("#screen-7", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 60.1);
+
+      // Register timeline for Hyperframes
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

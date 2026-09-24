@@ -167,13 +167,25 @@ npm run dev
 
 ---
 
-## Demonstration Mode
+---
 
-The system includes pre-configured clinical prescriptions for testing without needing an API key:
+## Video Demonstrations
 
-1. Knee Osteoarthritis: Demonstrates painkiller and antacid synergy alongside chronic acid reflux warnings.
-2. Acute Bronchitis: Demonstrates antibiotic and probiotic gut protection synergy with timed intervals.
-3. Lumbar Radiculopathy: Demonstrates high-power controlled opioid and steroid warnings with recommended lighter step-down alternatives.
-4. Oncology Protocol: Demonstrates the compassionate care shield, nominee PIN unlock (default PIN: 1234), and gentle patient guidance.
+Two 72-second high-definition (1080p, 30 fps) showcase videos are available in the `brag-output/` folder:
 
-To test live camera uploads with custom prescriptions, click the Key button in the top navigation bar and enter your Google Gemini API key.
+1. **Launch Video** (`brag-output/launch-video.mp4` - 1:12)
+   - Explains the medical communication crisis: unreadable handwriting, unknown medication combinations, unmonitored controlled opioids, and abrupt delivery of serious diagnoses.
+   - Summarizes the system's core capabilities: vision AI OCR, PubMed proof articles, controlled drug alerts with lighter alternatives, compassionate caregiver shields, and personalized diet routines.
+
+2. **Site Experience Video** (`brag-output/site-experience-video.mp4` - 1:12)
+   - Screen-by-screen demonstration showing the live user interface:
+     - Screen 1: Prescription Scanner and 4 clinical test presets.
+     - Screen 2: Decoded Prescription Slip and Medicine Synergy Shield.
+     - Screen 3: PubMed Evidence Drawer and Lighter Medicine Recommendations.
+     - Screen 4: Diagnostic Lab Reports Table and Drug-Lab Conflict Warnings.
+     - Screen 5: Compassionate Care Protocol and Caregiver PIN Unlock.
+     - Screen 6: Personalized Clinical Diet Routine and Meal Rules.
+     - Screen 7: Caretaker Routine Alarms, Chemist Box Verifier, and HIPAA Data Custody.
+
+Poster images are available at `brag-output/launch-poster.jpg` and `brag-output/site-poster.jpg`.
+
