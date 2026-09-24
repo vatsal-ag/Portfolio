@@ -368,6 +368,86 @@ export const PrescriptionScanner: React.FC<PrescriptionScannerProps> = ({
               </span>
             </div>
           </div>
+
+          {/* Sample 3: High-Power & Controlled Spine Pain (Lighter Alternatives) */}
+          <div 
+            onClick={() => handleSampleClick('sample-controlled-spine')}
+            className="group relative bg-white p-6 rounded-3xl border border-slate-200 hover:border-amber-500 hover:shadow-lg transition-all cursor-pointer space-y-4 overflow-hidden"
+          >
+            <span className="absolute -right-2 -bottom-4 text-7xl font-serif font-black text-slate-100/60 select-none group-hover:text-amber-50 transition-colors">
+              ℞
+            </span>
+
+            <div className="flex justify-between items-start">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-300">
+                    Spine &amp; Pain Clinic
+                  </span>
+                  <span className="text-[11px] text-slate-400">18 Sep 2026</span>
+                </div>
+                <h3 className="text-lg font-black text-slate-900 group-hover:text-amber-800 transition-colors font-['Outfit']">
+                  Lumbar Radiculopathy (Controlled Opioid &amp; Corticosteroid)
+                </h3>
+              </div>
+              <div className="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-amber-600 group-hover:text-white flex items-center justify-center transition-all shrink-0">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+
+            <p className="text-xs text-slate-600 line-clamp-2 relative z-10">
+              <strong>Prescribed:</strong> Tramadol 50mg (Opioid Analgesic) + Prednisolone 10mg (Steroid) + Pregabalin 75mg.
+            </p>
+
+            <div className="flex flex-wrap gap-2 text-[11px] pt-1 relative z-10">
+              <span className="inline-flex items-center gap-1 text-amber-900 font-bold bg-amber-100 px-2.5 py-1 rounded-xl border border-amber-300">
+                <AlertCircle className="w-3.5 h-3.5 text-amber-700" /> Controlled Substance Alert
+              </span>
+              <span className="inline-flex items-center gap-1 text-teal-900 font-bold bg-teal-50 px-2.5 py-1 rounded-xl border border-teal-200">
+                <Sparkles className="w-3.5 h-3.5 text-teal-600" /> Lighter Step-Down Options
+              </span>
+            </div>
+          </div>
+
+          {/* Sample 4: Compassionate Care & Oncology Protocol */}
+          <div 
+            onClick={() => handleSampleClick('sample-compassionate-oncology')}
+            className="group relative bg-white p-6 rounded-3xl border border-slate-200 hover:border-indigo-500 hover:shadow-lg transition-all cursor-pointer space-y-4 overflow-hidden"
+          >
+            <span className="absolute -right-2 -bottom-4 text-7xl font-serif font-black text-slate-100/60 select-none group-hover:text-indigo-50 transition-colors">
+              ℞
+            </span>
+
+            <div className="flex justify-between items-start">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+                    Comprehensive Care &amp; Oncology
+                  </span>
+                  <span className="text-[11px] text-slate-400">19 Sep 2026</span>
+                </div>
+                <h3 className="text-lg font-black text-slate-900 group-hover:text-indigo-800 transition-colors font-['Outfit']">
+                  Metastatic Care Protocol (Compassionate Nominee Shield)
+                </h3>
+              </div>
+              <div className="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-indigo-600 group-hover:text-white flex items-center justify-center transition-all shrink-0">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+
+            <p className="text-xs text-slate-600 line-clamp-2 relative z-10">
+              <strong>Prescribed:</strong> Capecitabine 500mg (Oral Chemotherapy) + Ondansetron 4mg (Antiemetic).
+            </p>
+
+            <div className="flex flex-wrap gap-2 text-[11px] pt-1 relative z-10">
+              <span className="inline-flex items-center gap-1 text-indigo-900 font-bold bg-indigo-100 px-2.5 py-1 rounded-xl border border-indigo-200">
+                <Lock className="w-3.5 h-3.5 text-indigo-700" /> Nominee Review Required First
+              </span>
+              <span className="inline-flex items-center gap-1 text-emerald-900 font-bold bg-emerald-50 px-2.5 py-1 rounded-xl border border-emerald-200">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Gentle Emotional Framing
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

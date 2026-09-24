@@ -6,7 +6,7 @@ This repository contains my projects which showcases my skills and technical exp
 The portfolio is designed to provide a comprehensive view of my journey as a developer. It includes detailed descriptions of the applications I have built, the technologies I am proficient in, and my ongoing commitment to continuous learning.
 
 ## Projects
-- **[Doctor Prescription (RxVision AI)](./Doctor%20Prescription)**: Intelligent healthcare platform for doctor handwriting OCR, drug synergy & contraindication detection, chemist medication box verification, and meal-aligned senior caretaker alarms (HIPAA & Indian IT Act 2000 Compliant).
+- **[Curafy AI](./Curafy%20AI)**: Intelligent healthcare platform for doctor handwriting OCR, medicine proof citations, high-power drug alerts with lighter alternatives, diagnostic lab report correlation, compassionate care with nominee shield, and condition-specific diet routines (HIPAA and Indian IT Act 2000 Compliant).
 - **[Cyber Legal Guidance System](./Cyber%20Legal%20Guidance%20System)**: Interactive cyber law advisory system for legal awareness and guidance under Indian cyber statutes.
 - **[Credit Card Fraud Detection](./Credit%20Card%20Fraud%20Detection)**: Machine learning models for detecting fraudulent credit card transactions in real-time data.
 - **[Fire Department Management System](./Fire%20Department%20Management%20System)**: Emergency response operations and asset management system.

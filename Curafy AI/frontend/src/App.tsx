@@ -9,6 +9,8 @@ import { PatientProfileModal } from './components/PatientProfileModal';
 import { ApiKeyModal } from './components/ApiKeyModal';
 import { AlarmTriggerModal } from './components/AlarmTriggerModal';
 import { MedicinePhotoVerifierModal } from './components/MedicinePhotoVerifierModal';
+import { LabReportsView } from './components/LabReportsView';
+import { PersonalizedDietView } from './components/PersonalizedDietView';
 import { api } from './services/api';
 import { PatientProfile, PrescriptionDetail, MedicationAlarm, PrescriptionMedicine } from './types';
 
@@ -89,6 +91,19 @@ export const App: React.FC = () => {
           />
         )}
 
+        {activeTab === 'reports' && (
+          <LabReportsView
+            seniorMode={seniorMode}
+            onGoToDiet={() => setActiveTab('diet')}
+          />
+        )}
+
+        {activeTab === 'diet' && (
+          <PersonalizedDietView
+            seniorMode={seniorMode}
+          />
+        )}
+
         {activeTab === 'history' && (
           <PrescriptionHistoryView
             onSelectPrescription={(p) => {
@@ -114,7 +129,9 @@ export const App: React.FC = () => {
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>RxVision AI • Doctor Prescription Reader &amp; Senior Caretaker Assistant</span>
+          <span className="font-semibold text-slate-700">
+            Curafy AI • Compassionate Prescription &amp; Health Intelligence
+          </span>
           <span className="text-emerald-700 font-semibold">
             Strictly Compliant with HIPAA 45 CFR &amp; Indian IT Act 2000 (SPDI Rules)
           </span>

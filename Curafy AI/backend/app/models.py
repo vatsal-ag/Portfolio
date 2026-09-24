@@ -14,6 +14,15 @@ class PatientProfile(SQLModel, table=True):
     allergies_json: str = Field(default="[\"Penicillin\"]")
     emergency_contact_name: str = Field(default="Sarah Vance (Daughter)")
     emergency_contact_phone: str = Field(default="+1 (555) 789-0142")
+    
+    # Nominee & Compassionate Care Settings
+    nominee_name: str = Field(default="Sarah Vance")
+    nominee_relationship: str = Field(default="Daughter / Primary Caregiver")
+    nominee_phone: str = Field(default="+1 (555) 789-0142")
+    nominee_email: str = Field(default="sarah.vance@example.com")
+    compassionate_disclosure_mode: bool = Field(default=True)  # True = Protect vulnerable patient from abrupt severe diagnosis shock; alert nominee first
+    nominee_pin: str = Field(default="1234")  # Caregiver lock PIN
+    
     hipaa_consent_signed: bool = Field(default=True)
     phi_encryption_enabled: bool = Field(default=True)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
@@ -65,6 +74,16 @@ class Prescription(SQLModel, table=True):
     image_filename: Optional[str] = Field(default=None)
     raw_ocr_text: Optional[str] = Field(default=None)
     notes: Optional[str] = Field(default=None)
+    
+    # Compassionate Care & Sensitive Diagnosis Fields
+    is_severe_diagnosis: bool = Field(default=False)  # True if Malignancy, Cancer, Advanced Organ Failure
+    severity_tier: str = Field(default="Standard")  # "Standard", "Elevated", "Critical/Sensitive"
+    compassionate_summary: Optional[str] = Field(default=None)  # Gentle, hopeful, supportive explanation for patient
+    nominee_review_required: bool = Field(default=False)  # If True, nominee should review first to support patient
+    nominee_reviewed: bool = Field(default=False)
+    nominee_review_notes: Optional[str] = Field(default=None)
+    nominee_reviewed_at: Optional[datetime] = Field(default=None)
+    
     # HIPAA audit & de-identification tag
     phi_redacted: bool = Field(default=False)
     created_at: datetime = Field(default_factory=datetime.utcnow)
@@ -82,7 +101,28 @@ class PrescriptionMedicine(SQLModel, table=True):
     instructions: str  # e.g., "Take after breakfast and dinner"
     purpose: str  # What the medicine is used for in plain language
     synergy_role: Optional[str] = None  # e.g., "Prescribed to counteract stomach acid caused by the painkiller"
-    timing_meal_relation: str = Field(default="after_meal")  # before_breakfast, after_breakfast, after_lunch, after_dinner, bedtime, etc.
+    timing_meal_relation: str = Field(default="after_meal")
+    
+    # High-Power / Controlled Medicine Alternative fields
+    is_controlled_or_high_power: bool = Field(default=False)
+    potency_level: str = Field(default="Standard")  # "Standard", "High Potency", "Controlled Substance", "Critical Cytotoxic"
+    potency_explanation: Optional[str] = Field(default=None)  # Why it's heavy / side-effect risk
+    lighter_alternative_name: Optional[str] = Field(default=None)  # Safer / step-down option
+    lighter_alternative_rationale: Optional[str] = Field(default=None)  # Clinical rationale to discuss with doctor
+    
+    # Peer-reviewed Proof & Clinical Articles JSON
+    proof_articles_json: str = Field(default="[]")
+
+    @property
+    def proof_articles(self) -> List[Dict[str, Any]]:
+        try:
+            return json.loads(self.proof_articles_json)
+        except Exception:
+            return []
+
+    @proof_articles.setter
+    def proof_articles(self, value: List[Dict[str, Any]]):
+        self.proof_articles_json = json.dumps(value)
 
 
 class InteractionRecord(SQLModel, table=True):
@@ -90,7 +130,7 @@ class InteractionRecord(SQLModel, table=True):
     prescription_id: int = Field(index=True)
     severity: str  # "CRITICAL", "MODERATE", "INFORMATIONAL", "SYNERGY"
     title: str  # e.g., "Potential Stomach Lining Irritation" or "Beneficial Synergy Detected"
-    interaction_type: str  # "DRUG_CONDITION", "DRUG_DRUG", "SYNERGY_COUNTERACT"
+    interaction_type: str  # "DRUG_CONDITION", "DRUG_DRUG", "SYNERGY_COUNTERACT", "HIGH_POTENCY_WARNING"
     medicines_involved: str  # e.g., "Diclofenac + Pantoprazole" or "Ibuprofen with Stomach Ulcers"
     explanation: str  # Clinical explanation in warm, patient-friendly phrasing
     recommendation: str  # Actionable advice, e.g. "Do not skip the antacid; take strictly after meals."
@@ -124,13 +164,41 @@ class MedicationAlarm(SQLModel, table=True):
     taken_at: Optional[datetime] = None
 
 
+class LabReport(SQLModel, table=True):
+    """Diagnostic Lab & Pathology Report with correlation to prescription and ongoing medications."""
+    id: Optional[int] = Field(default=None, primary_key=True)
+    patient_id: int = Field(default=1, index=True)
+    report_title: str  # e.g., "Comprehensive Metabolic & Kidney Panel (KFT/LFT)"
+    report_type: str  # "Blood Test", "Biochemistry", "Pathology", "Radiology / Imaging", "Urine Analysis", "HbA1c"
+    report_date: str  # "2026-09-18"
+    lab_name: Optional[str] = Field(default="Apollo Diagnostics / Quest Labs")
+    doctor_referred: Optional[str] = Field(default=None)
+    file_url: Optional[str] = Field(default=None)
+    summary_findings: str  # Patient friendly clinical summary
+    # Stored as JSON: [{"parameter": "Serum Creatinine", "value": "1.4", "unit": "mg/dL", "reference": "0.7 - 1.2", "status": "HIGH"}]
+    parameters_json: str = Field(default="[]")
+    clinical_correlation: Optional[str] = Field(default=None)  # e.g., "High creatinine indicates mild renal strain: caution advised with NSAIDs."
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+    @property
+    def parameters(self) -> List[Dict[str, Any]]:
+        try:
+            return json.loads(self.parameters_json)
+        except Exception:
+            return []
+
+    @parameters.setter
+    def parameters(self, value: List[Dict[str, Any]]):
+        self.parameters_json = json.dumps(value)
+
+
 # HIPAA & IT ACT COMPLIANCE MODELS
 class AuditLog(SQLModel, table=True):
     """Immutable access and activity log compliant with HIPAA Security Rule 45 CFR § 164.312(b)."""
     id: Optional[int] = Field(default=None, primary_key=True)
     timestamp: datetime = Field(default_factory=datetime.utcnow)
-    actor: str = Field(default="Patient")  # Patient, Caregiver, System, Auditor
-    action_type: str  # PRESCRIPTION_SCAN, RECORD_ACCESS, PROFILE_UPDATE, EXPORT_EHR, PURGE_PHI
+    actor: str = Field(default="Patient")  # Patient, Caregiver, Nominee, System, Auditor
+    action_type: str  # PRESCRIPTION_SCAN, REPORT_UPLOAD, NOMINEE_REVIEW, PROFILE_UPDATE, EXPORT_EHR, PURGE_PHI
     resource_id: Optional[str] = None
     details: str
     ip_address: Optional[str] = Field(default="127.0.0.1 (Local device)")
@@ -141,7 +209,7 @@ class ConsentRecord(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     patient_id: int = Field(default=1, index=True)
     consent_title: str
-    consent_type: str  # HIPAA_NOTICE, AI_VISION_OCR_PROCESSING, CAREGIVER_ALARM_AUTHORIZATION
+    consent_type: str  # HIPAA_NOTICE, AI_VISION_OCR_PROCESSING, CAREGIVER_ALARM_AUTHORIZATION, NOMINEE_DISCLOSURE
     status: str = Field(default="ACTIVE")  # ACTIVE, REVOKED
     signed_at: datetime = Field(default_factory=datetime.utcnow)
     terms_version: str = Field(default="v2026.1-HIPAA")

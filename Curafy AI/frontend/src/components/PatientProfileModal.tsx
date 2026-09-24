@@ -8,7 +8,10 @@ import {
   Plus, 
   Trash2, 
   Check, 
-  AlertCircle 
+  AlertCircle,
+  Shield,
+  KeyRound,
+  Users
 } from 'lucide-react';
 import { api } from '../services/api';
 import { PatientProfile, OngoingMedication } from '../types';
@@ -111,6 +114,15 @@ export const PatientProfileModal: React.FC<PatientProfileModalProps> = ({
     setIsSaving(true);
     try {
       const saved = await api.updateProfile(profile);
+      // Also update nominee details
+      await api.updateNominee({
+        nominee_name: profile.nominee_name,
+        nominee_relationship: profile.nominee_relationship,
+        nominee_phone: profile.nominee_phone,
+        nominee_email: profile.nominee_email,
+        compassionate_disclosure_mode: profile.compassionate_disclosure_mode,
+        nominee_pin: profile.nominee_pin
+      });
       onProfileUpdated(saved);
       onClose();
     } catch (err: any) {
@@ -130,7 +142,7 @@ export const PatientProfileModal: React.FC<PatientProfileModalProps> = ({
           <div className="flex items-center gap-2">
             <User className="w-5 h-5 text-teal-600" />
             <h3 className="font-bold text-slate-900 text-lg font-['Outfit']">
-              Patient Health Profile &amp; Interaction Safety Settings
+              Patient Profile, Nominee &amp; Safety Settings
             </h3>
           </div>
           <button
@@ -171,6 +183,83 @@ export const PatientProfileModal: React.FC<PatientProfileModalProps> = ({
                 onChange={(e) => setProfile({ ...profile, emergency_contact_phone: e.target.value })}
                 className="w-full mt-1 p-2 rounded-xl border border-slate-200 text-sm font-semibold text-slate-800"
               />
+            </div>
+          </div>
+
+          {/* CARE NOMINEE & COMPASSIONATE MENTAL HEALTH PROTOCOL */}
+          <div className="p-4 rounded-2xl bg-indigo-50/70 border border-indigo-200/80 space-y-4">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-black uppercase tracking-wider text-indigo-950 flex items-center gap-1.5">
+                <Users className="w-4 h-4 text-indigo-600" />
+                Designated Care Nominee / Primary Caregiver
+              </label>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">
+                Mental Health Shield
+              </span>
+            </div>
+            <p className="text-xs text-indigo-900 leading-relaxed">
+              If the patient is prescribed heavy medications or diagnosed with a severe/terminal illness (e.g. malignancy/cancer), our compassionate disclosure protocol alerts this nominee first to prepare supportive counseling.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Nominee Full Name</label>
+                <input
+                  type="text"
+                  value={profile.nominee_name || ''}
+                  onChange={(e) => setProfile({ ...profile, nominee_name: e.target.value })}
+                  placeholder="e.g. Sarah Vance"
+                  className="w-full p-2 rounded-xl border border-indigo-200 bg-white"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Relationship</label>
+                <input
+                  type="text"
+                  value={profile.nominee_relationship || ''}
+                  onChange={(e) => setProfile({ ...profile, nominee_relationship: e.target.value })}
+                  placeholder="e.g. Daughter / Primary Caregiver"
+                  className="w-full p-2 rounded-xl border border-indigo-200 bg-white"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Nominee Phone</label>
+                <input
+                  type="text"
+                  value={profile.nominee_phone || ''}
+                  onChange={(e) => setProfile({ ...profile, nominee_phone: e.target.value })}
+                  placeholder="+1 (555) 789-0142"
+                  className="w-full p-2 rounded-xl border border-indigo-200 bg-white"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Nominee Lock PIN (4-digits)</label>
+                <input
+                  type="password"
+                  maxLength={6}
+                  value={profile.nominee_pin || '1234'}
+                  onChange={(e) => setProfile({ ...profile, nominee_pin: e.target.value })}
+                  placeholder="1234"
+                  className="w-full p-2 rounded-xl border border-indigo-200 bg-white font-mono"
+                />
+              </div>
+            </div>
+
+            {/* Compassionate disclosure toggle */}
+            <div className="flex items-center gap-3 pt-2 border-t border-indigo-100">
+              <input
+                type="checkbox"
+                id="compassionateToggle"
+                checked={profile.compassionate_disclosure_mode ?? true}
+                onChange={(e) => setProfile({ ...profile, compassionate_disclosure_mode: e.target.checked })}
+                className="w-4 h-4 text-teal-600 rounded"
+              />
+              <label htmlFor="compassionateToggle" className="text-xs text-indigo-950 font-semibold cursor-pointer">
+                <strong>Enable Compassionate Care Protocol:</strong> Shield patient from abrupt severe shock; require nominee review and gentle disclosure framing.
+              </label>
             </div>
           </div>
 

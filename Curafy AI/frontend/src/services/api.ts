@@ -8,13 +8,15 @@ import {
   MealRoutine, 
   MedicationAlarm, 
   AuditLog, 
-  ComplianceStatus 
+  ComplianceStatus,
+  LabReport,
+  DietPlan
 } from '../types';
 
 const BASE_URL = '/api';
 
 export const api = {
-  // Patient Profile
+  // Patient Profile & Nominee
   async getProfile(): Promise<PatientProfile> {
     const res = await fetch(`${BASE_URL}/patient/profile`);
     if (!res.ok) throw new Error('Failed to fetch patient profile');
@@ -30,6 +32,38 @@ export const api = {
     if (!res.ok) throw new Error('Failed to update profile');
     const json = await res.json();
     return json.profile;
+  },
+
+  async updateNominee(data: Partial<PatientProfile>): Promise<PatientProfile> {
+    const res = await fetch(`${BASE_URL}/patient/nominee`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error('Failed to update nominee details');
+    const json = await res.json();
+    return json.profile;
+  },
+
+  async reviewByNominee(rxId: number, pin: string, notes?: string): Promise<{ success: boolean; prescription: Prescription }> {
+    const res = await fetch(`${BASE_URL}/prescriptions/${rxId}/nominee-review`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pin, notes })
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ detail: 'Failed nominee review' }));
+      throw new Error(err.detail || 'Failed nominee review');
+    }
+    return res.json();
+  },
+
+  async patientConsentView(rxId: number): Promise<{ success: boolean; prescription: Prescription }> {
+    const res = await fetch(`${BASE_URL}/prescriptions/${rxId}/patient-consent-view`, {
+      method: 'POST'
+    });
+    if (!res.ok) throw new Error('Failed to acknowledge sensitive view');
+    return res.json();
   },
 
   // Ongoing Medications
@@ -105,6 +139,46 @@ export const api = {
   async deletePrescription(id: number): Promise<void> {
     const res = await fetch(`${BASE_URL}/prescriptions/${id}`, { method: 'DELETE' });
     if (!res.ok) throw new Error('Failed to delete prescription');
+  },
+
+  // Diagnostic Lab Reports & Correlation
+  async getLabReports(): Promise<LabReport[]> {
+    const res = await fetch(`${BASE_URL}/reports`);
+    if (!res.ok) throw new Error('Failed to fetch lab reports');
+    return res.json();
+  },
+
+  async getLabReportDetail(id: number): Promise<LabReport> {
+    const res = await fetch(`${BASE_URL}/reports/${id}`);
+    if (!res.ok) throw new Error('Failed to fetch lab report detail');
+    return res.json();
+  },
+
+  async uploadLabReport(formData: FormData): Promise<{ success: boolean; report_id: number; report: LabReport }> {
+    const res = await fetch(`${BASE_URL}/reports/upload`, {
+      method: 'POST',
+      body: formData
+    });
+    if (!res.ok) throw new Error('Failed to upload diagnostic report');
+    return res.json();
+  },
+
+  async loadSampleLabReport(index: number): Promise<{ success: boolean; report: LabReport }> {
+    const res = await fetch(`${BASE_URL}/reports/load-sample/${index}`, { method: 'POST' });
+    if (!res.ok) throw new Error('Failed to load sample lab report');
+    return res.json();
+  },
+
+  async deleteLabReport(id: number): Promise<void> {
+    const res = await fetch(`${BASE_URL}/reports/${id}`, { method: 'DELETE' });
+    if (!res.ok) throw new Error('Failed to delete lab report');
+  },
+
+  // Personalized Clinical Diet
+  async getPersonalizedDiet(): Promise<DietPlan> {
+    const res = await fetch(`${BASE_URL}/diet/recommendations`);
+    if (!res.ok) throw new Error('Failed to fetch personalized diet plan');
+    return res.json();
   },
 
   // Elderly Caretaker Meal Routine & Alarms
